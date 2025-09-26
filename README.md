@@ -17,6 +17,7 @@ This repository contains my machine learning project for CS 330. The project foc
 
 ## Structure
 First thoughts;
--Use SportsBERT from Google
--Take the summary from SportsBERT and feed it with fighter stats to XGBoost or LightGBM
--Engineer features to account for winstreaks, fight camp lenght, fight camp location
+- Use SportsBERT from Google
+- Take the summary from SportsBERT and feed it with fighter stats to XGBoost or LightGBM
+- Engineer features to account for winstreaks, fight camp lenght, fight camp location
+
