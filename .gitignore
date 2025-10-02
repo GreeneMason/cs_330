@@ -1,0 +1,11 @@
+# Python
+__pycache__/
+*.pyc
+
+# Kaggle credentials and downloaded data
+kaggle.json
+data/
+*.db
+
+# Env files
+.env
