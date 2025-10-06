@@ -1,11 +1,47 @@
 # Python
 __pycache__/
-*.pyc
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
 
-# Kaggle credentials and downloaded data
-kaggle.json
-data/
+# Virtual Environment
+venv/
+.env/
+.venv/
+ENV/
+
+# IDEs
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Jupyter Notebook
+.ipynb_checkpoints
+*.ipynb
+
+# Data files
 *.db
+data/UFC dataset/
+.kaggle/kaggle.json
 
-# Env files
+# System
+.DS_Store
+Thumbs.db
 .env

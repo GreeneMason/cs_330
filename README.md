@@ -1,13 +1,47 @@
-﻿# Kaggle dataset downloader and SQLite importer
+﻿# UFC Fight Analysis
 
-Place your `kaggle.json` (Kaggle API token) in this directory or in `~/.kaggle/kaggle.json`.
+A Python project for analyzing UFC fighter statistics and predicting fight outcomes using machine learning.
 
-Steps:
+## Project Structure
 
-1. Create and activate a Python virtual environment.
+```
+cs_330/
+├── data/                  # Data files and database
+│   ├── UFC dataset/      # Raw UFC dataset
+│   └── ufc_database.db   # SQLite database
+├── docs/                 # Documentation
+├── notebooks/           # Jupyter notebooks for analysis
+├── scripts/             # Utility scripts
+│   ├── check_columns.py
+│   ├── create_database.py
+│   ├── download_dataset.py
+│   └── download_and_import.py
+├── src/                 # Source code
+│   └── ufc_analysis/    # Main package
+│       ├── __init__.py
+│       └── analyzer.py
+├── tests/              # Unit tests
+├── requirements.txt    # Project dependencies
+├── README.md          # This file
+└── .gitignore        # Git ignore file
+```
 
-```powershell
-python -m venv .venv; .\.venv\Scripts\Activate.ps1
+## Installation
+
+1. Create a virtual environment:
+```bash
+python -m venv venv
+source venv/bin/activate  # On Windows: .\venv\Scripts\activate
+```
+
+2. Install dependencies:
+```bash
+pip install -r requirements.txt
+```
+
+3. Set up Kaggle authentication:
+   - Place your `kaggle.json` (Kaggle API token) in the `.kaggle` directory
+   - Get your API token from https://www.kaggle.com/settings
 pip install -r requirements.txt
 ```
 
