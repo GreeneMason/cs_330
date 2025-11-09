@@ -39,7 +39,20 @@ ENV/
 # Data files
 *.db
 data/UFC dataset/
-.kaggle/kaggle.json
+
+# Kaggle credentials (SECURITY)
+.kaggle/
+kaggle.json
+*.json.secret
+
+# Large model files
+models/*.pkl
+models/*.joblib
+
+# Generated diagrams
+diagrams/*.png
+diagrams/*.svg
+diagrams/*.mmd
 
 # System
 .DS_Store
