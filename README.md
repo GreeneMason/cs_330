@@ -1,6 +1,51 @@
-﻿# UFC Fight Analysis
+﻿# 🥊 UFC Fight Predictor
 
-A Python project for analyzing UFC fighter statistics and predicting fight outcomes using machine learning.
+A machine learning system for predicting UFC fight outcomes with **74.87% accuracy**. Trained on 7,439 historical fights using XGBoost.
+
+## 🚀 Quick Start
+
+**Predict a fight in 30 seconds:**
+
+```bash
+# 1. Activate environment
+.\venv\Scripts\Activate.ps1
+
+# 2. Run predictor
+python predict_simple.py --interactive
+```
+
+👉 **[Full Quick Start Guide →](QUICKSTART.md)**
+
+## ✨ Features
+
+- 🔮 **Predict fight outcomes** with confidence scores
+- 📊 **Analyze 2,479 fighters** from historical database
+- 🤖 **3 ML models** (Logistic Regression, Random Forest, XGBoost)
+- 📈 **10 data visualizations** showing fight statistics
+- 📚 **Comprehensive documentation** and guides
+
+## 📁 What's Included
+
+```
+cs_330/
+├── predict_simple.py         # ⭐ Main prediction tool
+├── train_simple_model.py     # Train ML models
+├── data/
+│   ├── ufc_database.db       # 2,479 fighters
+│   └── normalized_ufc.db     # 7,439 fights in 3NF
+├── models/
+│   └── best_model.pkl        # Trained XGBoost (74.87% accuracy)
+└── docs/                     # Complete documentation
+```
+
+## 📖 Documentation
+
+- **[QUICKSTART.md](QUICKSTART.md)** - Get started in 5 minutes
+- **[docs/prediction_guide.md](docs/prediction_guide.md)** - How to predict fights
+- **[docs/ml_pipeline.md](docs/ml_pipeline.md)** - ML pipeline details
+- **[docs/database_er_diagrams.md](docs/database_er_diagrams.md)** - Database structure
+
+---
 
 ## Development Log
 
