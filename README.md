@@ -10,7 +10,10 @@ A machine learning system for predicting UFC fight outcomes with **74.87% accura
 # 1. Activate environment
 .\venv\Scripts\Activate.ps1
 
-# 2. Run predictor
+# 2. Run predictor (event-normalized - recommended)
+python predict_event_normalized.py
+
+# OR use original predictor
 python predict_simple.py --interactive
 ```
 
@@ -23,24 +26,32 @@ python predict_simple.py --interactive
 - 🤖 **3 ML models** (Logistic Regression, Random Forest, XGBoost)
 - 📈 **10 data visualizations** showing fight statistics
 - 📚 **Comprehensive documentation** and guides
+- 🆔 **Event-normalized data** with 87.4% storage reduction
 
 ## 📁 What's Included
 
 ```
 cs_330/
 ├── predict_simple.py         # ⭐ Main prediction tool
+├── predict_event_normalized.py # 🆔 Event-normalized predictor
 ├── train_simple_model.py     # Train ML models
+├── train_event_normalized_model.py # Train with event normalization
 ├── data/
 │   ├── ufc_database.db       # 2,479 fighters
-│   └── normalized_ufc.db     # 7,439 fights in 3NF
+│   ├── normalized_ufc.db     # 7,439 fights in 3NF
+│   ├── event_normalized_large_dataset.csv # Event-ID dataset
+│   ├── events_reference.csv  # Event lookup table
+│   └── event_normalized_data.db # SQLite with events
 ├── models/
-│   └── best_model.pkl        # Trained XGBoost (74.87% accuracy)
+│   ├── best_model.pkl        # Trained XGBoost (74.87% accuracy)
+│   └── event_normalized_best_model.pkl # Event-normalized model
 └── docs/                     # Complete documentation
 ```
 
 ## 📖 Documentation
 
 - **[QUICKSTART.md](QUICKSTART.md)** - Get started in 5 minutes
+- **[EVENT_NORMALIZATION.md](EVENT_NORMALIZATION.md)** - Event ID system implementation
 - **[docs/prediction_guide.md](docs/prediction_guide.md)** - How to predict fights
 - **[docs/ml_pipeline.md](docs/ml_pipeline.md)** - ML pipeline details
 - **[docs/database_er_diagrams.md](docs/database_er_diagrams.md)** - Database structure
