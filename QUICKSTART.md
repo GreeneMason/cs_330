@@ -1,10 +1,28 @@
 # 🥊 UFC Fight Predictor - Quick Start Guide
 
+## **⚡ Can't Activate Virtual Environment?**
+
+**Don't worry! Use the full Python path instead:**
+```powershell
+# No activation needed - just use the full path to Python:
+C:\Users\mason\OneDrive\Documents\GitHub\cs_330\venv\Scripts\python.exe predict_simple.py --interactive
+```
+
+**Or fix activation once and for all:**
+```powershell
+Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope Process
+.\venv\Scripts\Activate.ps1
+```
+
+---
+
 ## **TL;DR - Predict a Fight Right Now:**
 
-```bash
+```powershell
 # 1. Activate your environment
 .\venv\Scripts\Activate.ps1
+# OR if that doesn't work:
+# venv\Scripts\Activate.ps1
 
 # 2. Predict a fight
 python predict_simple.py --interactive
@@ -21,9 +39,22 @@ cd cs_330
 ```
 
 ### **2. Create Virtual Environment**
-```bash
+```powershell
 python -m venv venv
-.\venv\Scripts\Activate.ps1  # Windows PowerShell
+
+# Activate (choose one method):
+
+# Method 1: PowerShell (recommended)
+.\venv\Scripts\Activate.ps1
+
+# Method 2: If execution policy blocked
+powershell -ExecutionPolicy Bypass -File venv\Scripts\Activate.ps1
+
+# Method 3: Use full path
+C:\Users\mason\OneDrive\Documents\GitHub\cs_330\venv\Scripts\python.exe
+
+# Method 4: Command Prompt (if PowerShell fails)
+venv\Scripts\activate.bat
 ```
 
 ### **3. Install Dependencies**
@@ -197,6 +228,20 @@ print(fighter)
    - Use partial names for search
 
 ### **⚠️ Common Issues:**
+
+**"Cannot activate venv" or "execution policy" error**
+```powershell
+# Solution 1: Bypass execution policy for this session
+Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope Process
+.\venv\Scripts\Activate.ps1
+
+# Solution 2: Use full Python path (no activation needed!)
+C:\Users\mason\OneDrive\Documents\GitHub\cs_330\venv\Scripts\python.exe predict_simple.py --interactive
+
+# Solution 3: Use Command Prompt instead of PowerShell
+# Open CMD (not PowerShell) and run:
+venv\Scripts\activate.bat
+```
 
 **"Model not found"**
 ```bash
