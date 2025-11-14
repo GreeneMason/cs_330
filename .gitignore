@@ -26,6 +26,17 @@ venv/
 .venv/
 ENV/
 
+# Environment Variables (SECURITY CRITICAL)
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+.env.development
+.env.production
+.env.staging
+*.env
+
 # IDEs
 .idea/
 .vscode/
@@ -40,21 +51,90 @@ ENV/
 *.db
 data/UFC dataset/
 
+# Large CSV files (keep smaller reference files)
+data/*.csv
+!data/events_reference.csv
+shared/data/*.csv
+!shared/data/fighters.json
+
 # Kaggle credentials (SECURITY)
 .kaggle/
 kaggle.json
 *.json.secret
 
+# API Keys and Credentials (SECURITY CRITICAL)
+**/config/secrets.json
+**/config/credentials.json
+**/*_credentials.json
+**/*_secrets.json
+**/*_keys.json
+**/auth_config.json
+
 # Large model files
 models/*.pkl
 models/*.joblib
+models/*.h5
+models/*.pt
+models/*.pth
+models/*.onnx
+*.model
+*.weights
 
 # Generated diagrams
 diagrams/*.png
 diagrams/*.svg
 diagrams/*.mmd
 
+# Next.js
+frontend/.next/
+frontend/out/
+frontend/build/
+frontend/node_modules/
+ufc-prediction-frontend/.next/
+ufc-prediction-frontend/out/
+ufc-prediction-frontend/build/
+ufc-prediction-frontend/node_modules/
+
+# Dependencies
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
 # System
 .DS_Store
 Thumbs.db
-.env
+
+# Flask session files
+backend/flask_session/
+backend/instance/
+
+# Logs
+*.log
+logs/
+*.out
+
+# Temporary files
+temp/
+tmp/
+*.tmp
+*.temp
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Security - remove any accidentally committed secrets
+**/secrets/
+**/private/
+**/.secrets/
+*password*
+*secret*
+*key*
+*token*
+*credential*

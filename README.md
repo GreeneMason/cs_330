@@ -1,10 +1,17 @@
-# UFC Fight Prediction Analysis System
+# UFC Prediction System 🥊
 
-🥊 **Advanced Machine Learning System for UFC Fight Outcome Prediction**
+A complete machine learning system for predicting UFC fight outcomes with 91.33% accuracy.
 
-This repository contains a comprehensive ML pipeline for UFC fight analysis with multiple model types including decision trees, ensemble methods, and neural networks achieving up to **89.50% accuracy**.
+## 🚀 Quick Start
 
-## 🚀 Quick Start for AI Agents
+Run the entire system with one command:
+```bash
+./dev-scripts/start-dev.bat
+```
+
+This starts:
+- **Frontend** at `http://localhost:3000` - Web interface
+- **Backend** at `http://localhost:8000` - ML API server
 
 ### Repository Structure Overview
 ```
