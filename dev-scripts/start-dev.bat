@@ -1,28 +1,37 @@
 @echo off
-echo Starting UFC Prediction System Development Environment...
+echo ============================================================
+echo 🚀 UFC PREDICTION SYSTEM - DEVELOPMENT MODE
+echo ============================================================
 echo.
 
-echo [1/3] Setting up Python backend...
-cd backend
-call ..\.venv\Scripts\activate
-echo Backend Python environment activated
+cd /d "%~dp0\.."
+
+echo 📊 Starting Developer Dashboard...
+start "Dev Dashboard" cmd /k "cd dev-dashboard && ..\.venv\Scripts\python.exe app.py"
+
+timeout /t 2 /nobreak >nul
+
+echo 🔧 Starting Backend Server...
+start "Backend API" cmd /k "cd backend && ..\.venv\Scripts\python.exe app.py"
+
+timeout /t 3 /nobreak >nul
+
+echo 🎯 Starting Frontend Server...
+start "Frontend App" cmd /k "cd frontend && npm run dev"
 
 echo.
-echo [2/3] Starting frontend development server...
-cd ..\frontend
-start "Frontend Dev Server" cmd /c "npm run dev"
-
+echo ============================================================
+echo 🎉 DEVELOPMENT SERVERS STARTING...
+echo ============================================================
+echo 📊 Developer Dashboard: http://localhost:5001
+echo 🔧 Backend API:         http://localhost:8000
+echo 🎯 Frontend App:        http://localhost:3000
+echo ============================================================
 echo.
-echo [3/3] Starting backend API server...
-cd ..\backend
-start "Backend API Server" cmd /c "python app.py"
-
+echo ✅ All services are starting up...
+echo ✅ Check the Developer Dashboard for real-time status!
 echo.
-echo =================================
-echo Development Environment Started!
-echo =================================
-echo Frontend: http://localhost:3000
-echo Backend:  http://localhost:8000
+pause
 echo.
 echo Press any key to stop all services...
 pause >nul

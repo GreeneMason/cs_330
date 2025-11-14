@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UFC Prediction System - Developer Dashboard</title>
+    <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        :root {
+            --primary: #1a1a1a;
+            --secondary: #2d2d2d;
+            --accent: #ff4444;
+            --success: #00ff88;
+            --warning: #ffaa00;
+            --error: #ff4444;
+            --text: #ffffff;
+            --text-muted: #888;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--primary);
+            color: var(--text);
+            overflow-x: hidden;
+        }
+
+        .header {
+            background: var(--secondary);
+            padding: 1rem 2rem;
+            border-bottom: 2px solid var(--accent);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+
+        .header h1 {
+            color: var(--accent);
+            font-size: 1.5rem;
+        }
+
+        .header .status {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .connection-status {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            background: var(--secondary);
+            border: 1px solid var(--success);
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--success);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            grid-template-rows: auto auto auto;
+            gap: 1rem;
+            padding: 1rem;
+            height: calc(100vh - 80px);
+        }
+
+        .card {
+            background: var(--secondary);
+            border-radius: 8px;
+            padding: 1.5rem;
+            border: 1px solid #444;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .card h3 {
+            color: var(--accent);
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .services-card {
+            grid-column: 1 / 2;
+            grid-row: 1 / 2;
+        }
+
+        .system-card {
+            grid-column: 2 / 3;
+            grid-row: 1 / 2;
+        }
+
+        .processes-card {
+            grid-column: 3 / 4;
+            grid-row: 1 / 2;
+        }
+
+        .metrics-card {
+            grid-column: 1 / 3;
+            grid-row: 2 / 3;
+        }
+
+        .activity-card {
+            grid-column: 3 / 4;
+            grid-row: 2 / 4;
+        }
+
+        .charts-card {
+            grid-column: 1 / 3;
+            grid-row: 3 / 4;
+        }
+
+        .service-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.75rem;
+            margin: 0.5rem 0;
+            border-radius: 6px;
+            background: rgba(255,255,255,0.05);
+        }
+
+        .service-info {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .service-status {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        .status-online { background: var(--success); }
+        .status-offline { background: var(--error); }
+        .status-timeout { background: var(--warning); }
+        .status-error { background: var(--error); }
+
+        .service-name {
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+        }
+
+        .service-details {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        .metric {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .metric:last-child {
+            border-bottom: none;
+        }
+
+        .metric-value {
+            font-weight: 600;
+            color: var(--success);
+        }
+
+        .activity-log {
+            height: 400px;
+            overflow-y: auto;
+            scrollbar-width: thin;
+            scrollbar-color: var(--accent) var(--secondary);
+        }
+
+        .activity-log::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .activity-log::-webkit-scrollbar-track {
+            background: var(--secondary);
+        }
+
+        .activity-log::-webkit-scrollbar-thumb {
+            background: var(--accent);
+            border-radius: 3px;
+        }
+
+        .log-entry {
+            padding: 0.5rem;
+            margin: 0.25rem 0;
+            border-radius: 4px;
+            border-left: 3px solid;
+            font-size: 0.85rem;
+            background: rgba(255,255,255,0.02);
+        }
+
+        .log-success { border-left-color: var(--success); }
+        .log-error { border-left-color: var(--error); }
+        .log-warning { border-left-color: var(--warning); }
+        .log-info { border-left-color: #4a9eff; }
+
+        .log-timestamp {
+            color: var(--text-muted);
+            font-size: 0.75rem;
+        }
+
+        .process-list {
+            max-height: 200px;
+            overflow-y: auto;
+        }
+
+        .process-item {
+            padding: 0.5rem;
+            margin: 0.25rem 0;
+            background: rgba(255,255,255,0.05);
+            border-radius: 4px;
+            font-size: 0.8rem;
+        }
+
+        .process-pid {
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        .chart-container {
+            position: relative;
+            height: 200px;
+            margin-top: 1rem;
+        }
+
+        .loading {
+            text-align: center;
+            color: var(--text-muted);
+            padding: 2rem;
+        }
+
+        @media (max-width: 1200px) {
+            .dashboard-grid {
+                grid-template-columns: 1fr 1fr;
+                grid-template-rows: auto auto auto auto;
+            }
+            
+            .services-card { grid-column: 1 / 2; grid-row: 1 / 2; }
+            .system-card { grid-column: 2 / 3; grid-row: 1 / 2; }
+            .processes-card { grid-column: 1 / 3; grid-row: 2 / 3; }
+            .metrics-card { grid-column: 1 / 3; grid-row: 3 / 4; }
+            .activity-card { grid-column: 1 / 3; grid-row: 4 / 5; }
+            .charts-card { grid-column: 1 / 3; grid-row: 5 / 6; }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🎯 UFC Prediction System - Developer Dashboard</h1>
+        <div class="status">
+            <div class="connection-status" id="connectionStatus">
+                <div class="status-dot"></div>
+                <span>Connected</span>
+            </div>
+            <div id="lastUpdate">Last update: --:--:--</div>
+        </div>
+    </div>
+
+    <div class="dashboard-grid">
+        <!-- Services Status -->
+        <div class="card services-card">
+            <h3>🚀 Service Status</h3>
+            <div id="servicesStatus">
+                <div class="loading">Loading services...</div>
+            </div>
+        </div>
+
+        <!-- System Metrics -->
+        <div class="card system-card">
+            <h3>📊 System Health</h3>
+            <div id="systemMetrics">
+                <div class="loading">Loading metrics...</div>
+            </div>
+        </div>
+
+        <!-- Process Information -->
+        <div class="card processes-card">
+            <h3>⚙️ Active Processes</h3>
+            <div id="processInfo">
+                <div class="loading">Loading processes...</div>
+            </div>
+        </div>
+
+        <!-- API Metrics -->
+        <div class="card metrics-card">
+            <h3>📈 API Performance</h3>
+            <div id="apiMetrics">
+                <div class="loading">Loading API metrics...</div>
+            </div>
+        </div>
+
+        <!-- Activity Log -->
+        <div class="card activity-card">
+            <h3>📋 Activity Log</h3>
+            <div class="activity-log" id="activityLog">
+                <div class="loading">Loading activity...</div>
+            </div>
+        </div>
+
+        <!-- Performance Charts -->
+        <div class="card charts-card">
+            <h3>📉 Performance Charts</h3>
+            <div class="chart-container">
+                <canvas id="performanceChart"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // WebSocket connection
+        const socket = io();
+        let performanceChart;
+        
+        // Initialize chart
+        function initChart() {
+            const ctx = document.getElementById('performanceChart').getContext('2d');
+            performanceChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: [],
+                    datasets: [{
+                        label: 'CPU Usage (%)',
+                        data: [],
+                        borderColor: '#ff4444',
+                        backgroundColor: 'rgba(255, 68, 68, 0.1)',
+                        tension: 0.4
+                    }, {
+                        label: 'Memory Usage (%)',
+                        data: [],
+                        borderColor: '#00ff88',
+                        backgroundColor: 'rgba(0, 255, 136, 0.1)',
+                        tension: 0.4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            labels: {
+                                color: '#ffffff'
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            max: 100,
+                            grid: {
+                                color: 'rgba(255,255,255,0.1)'
+                            },
+                            ticks: {
+                                color: '#ffffff'
+                            }
+                        },
+                        x: {
+                            grid: {
+                                color: 'rgba(255,255,255,0.1)'
+                            },
+                            ticks: {
+                                color: '#ffffff'
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        // Update chart data
+        function updateChart(systemData) {
+            if (!performanceChart || !systemData.timestamp) return;
+            
+            const timeLabel = systemData.timestamp;
+            const labels = performanceChart.data.labels;
+            
+            // Keep only last 20 data points
+            if (labels.length >= 20) {
+                labels.shift();
+                performanceChart.data.datasets[0].data.shift();
+                performanceChart.data.datasets[1].data.shift();
+            }
+            
+            labels.push(timeLabel);
+            performanceChart.data.datasets[0].data.push(systemData.cpu_percent || 0);
+            performanceChart.data.datasets[1].data.push(systemData.memory_percent || 0);
+            
+            performanceChart.update('none');
+        }
+
+        // Update services status
+        function updateServices(services) {
+            const container = document.getElementById('servicesStatus');
+            let html = '';
+            
+            Object.entries(services).forEach(([name, service]) => {
+                const statusClass = `status-${service.status}`;
+                const lastCheck = service.last_check ? 
+                    new Date(service.last_check).toLocaleTimeString() : 'Never';
+                
+                html += `
+                    <div class="service-item">
+                        <div class="service-info">
+                            <div class="service-status ${statusClass}"></div>
+                            <div>
+                                <div class="service-name">${name}</div>
+                                <div class="service-details">
+                                    Status: ${service.status} | Last check: ${lastCheck}
+                                    ${service.response_time ? `| ${service.response_time.toFixed(0)}ms` : ''}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            container.innerHTML = html;
+        }
+
+        // Update system metrics
+        function updateSystemMetrics(system) {
+            const container = document.getElementById('systemMetrics');
+            const html = `
+                <div class="metric">
+                    <span>CPU Usage</span>
+                    <span class="metric-value">${system.cpu_percent?.toFixed(1) || 0}%</span>
+                </div>
+                <div class="metric">
+                    <span>Memory Usage</span>
+                    <span class="metric-value">${system.memory_percent?.toFixed(1) || 0}%</span>
+                </div>
+                <div class="metric">
+                    <span>Disk Usage</span>
+                    <span class="metric-value">${system.disk_usage?.toFixed(1) || 0}%</span>
+                </div>
+                <div class="metric">
+                    <span>Network Connections</span>
+                    <span class="metric-value">${system.network_connections || 0}</span>
+                </div>
+            `;
+            
+            container.innerHTML = html;
+        }
+
+        // Update process information
+        function updateProcesses(processes) {
+            const container = document.getElementById('processInfo');
+            let html = '';
+            
+            if (processes.node_processes.length > 0) {
+                html += '<h4 style="color: #00ff88; margin-bottom: 0.5rem;">Node.js Processes</h4>';
+                processes.node_processes.forEach(proc => {
+                    html += `
+                        <div class="process-item">
+                            <div>PID: <span class="process-pid">${proc.pid}</span></div>
+                            <div>CPU: ${proc.cpu?.toFixed(1) || 0}% | Memory: ${proc.memory?.toFixed(1) || 0}%</div>
+                            <div style="color: #888; font-size: 0.75rem;">${proc.command}</div>
+                        </div>
+                    `;
+                });
+            }
+            
+            if (processes.python_processes.length > 0) {
+                html += '<h4 style="color: #ff4444; margin: 1rem 0 0.5rem 0;">Python Processes</h4>';
+                processes.python_processes.forEach(proc => {
+                    html += `
+                        <div class="process-item">
+                            <div>PID: <span class="process-pid">${proc.pid}</span></div>
+                            <div>CPU: ${proc.cpu?.toFixed(1) || 0}% | Memory: ${proc.memory?.toFixed(1) || 0}%</div>
+                            <div style="color: #888; font-size: 0.75rem;">${proc.command}</div>
+                        </div>
+                    `;
+                });
+            }
+            
+            if (html === '') {
+                html = '<div class="loading">No relevant processes found</div>';
+            }
+            
+            container.innerHTML = html;
+        }
+
+        // Update activity log
+        function updateActivityLog(activities) {
+            const container = document.getElementById('activityLog');
+            let html = '';
+            
+            activities.reverse().forEach(activity => {
+                const statusClass = `log-${activity.status}`;
+                html += `
+                    <div class="log-entry ${statusClass}">
+                        <div class="log-timestamp">${activity.timestamp}</div>
+                        <div><strong>${activity.type}:</strong> ${activity.message}</div>
+                    </div>
+                `;
+            });
+            
+            container.innerHTML = html;
+            container.scrollTop = container.scrollHeight;
+        }
+
+        // Fetch and update dashboard data
+        async function updateDashboard() {
+            try {
+                const response = await fetch('/api/status');
+                const data = await response.json();
+                
+                updateServices(data.services);
+                updateSystemMetrics(data.system);
+                updateProcesses(data.processes);
+                updateActivityLog(data.activity);
+                updateChart(data.system);
+                
+                document.getElementById('lastUpdate').textContent = 
+                    `Last update: ${new Date().toLocaleTimeString()}`;
+                    
+            } catch (error) {
+                console.error('Failed to update dashboard:', error);
+            }
+        }
+
+        // Socket event handlers
+        socket.on('connect', function() {
+            console.log('Connected to dashboard');
+            document.getElementById('connectionStatus').innerHTML = `
+                <div class="status-dot"></div>
+                <span>Connected</span>
+            `;
+        });
+
+        socket.on('disconnect', function() {
+            console.log('Disconnected from dashboard');
+            document.getElementById('connectionStatus').innerHTML = `
+                <div class="status-dot" style="background: #ff4444;"></div>
+                <span>Disconnected</span>
+            `;
+        });
+
+        socket.on('status_update', function(data) {
+            updateServices(data.services);
+            updateSystemMetrics(data.system);
+            updateProcesses(data.processes);
+            updateChart(data.system);
+        });
+
+        // Initialize dashboard
+        document.addEventListener('DOMContentLoaded', function() {
+            initChart();
+            updateDashboard();
+            
+            // Update every 30 seconds as backup to WebSocket
+            setInterval(updateDashboard, 30000);
+        });
+    </script>
+</body>
+</html>
