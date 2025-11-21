@@ -1,5 +1,5 @@
 """
-Simple ML Pipeline for UFC Fight Prediction
+Simple ML Pipeline for Fight Prediction
 Works with the event-normalized dataset
 """
 
@@ -19,11 +19,11 @@ import warnings
 warnings.filterwarnings('ignore')
 
 
-class EventNormalizedUFCPredictor:
-    """UFC fight predictor using event-normalized data"""
+class EventNormalizedFightPredictor:
+    """Fight predictor using event-normalized data"""
     
-    def __init__(self, data_path='../../shared/data/event_normalized_large_dataset.csv', 
-                 events_path='data/events_reference.csv'):
+    def __init__(self, data_path='../../../data/event_normalized_large_dataset.csv', 
+                 events_path='../../../data/events_reference.csv'):
         self.data_path = data_path
         self.events_path = events_path
         self.models = {}
@@ -32,8 +32,8 @@ class EventNormalizedUFCPredictor:
         self.label_encoder = LabelEncoder()
         
         # Create output directory
-        self.model_dir = Path('models')
-        self.model_dir.mkdir(exist_ok=True)
+        self.model_dir = Path('../../../models/ensemble')
+        self.model_dir.mkdir(parents=True, exist_ok=True)
         
     def load_data(self):
         """Load the event-normalized dataset"""
@@ -78,7 +78,7 @@ class EventNormalizedUFCPredictor:
         excluded_cols = [
             'event_id',  # Event ID not used for prediction  
             'r_fighter', 'b_fighter',  # Fighter names
-            'winner',  # Target variable
+            'winner', 'winner_encoded',  # Target variable
             'referee',  # Not predictive
             'time_sec', 'finish_round', 'total_rounds',  # Fight outcome details
             'weight_class', 'gender', 'method',  # Categorical (use encoded versions)
@@ -330,7 +330,7 @@ class EventNormalizedUFCPredictor:
     
     def run_full_pipeline(self):
         """Run the complete training pipeline"""
-        print("🥊 EVENT-NORMALIZED UFC FIGHT PREDICTOR")
+        print("🥊 EVENT-NORMALIZED FIGHT PREDICTOR")
         print("=" * 60)
         
         # Load data
@@ -363,7 +363,7 @@ class EventNormalizedUFCPredictor:
 def main():
     """Main training script"""
     # Initialize predictor with event-normalized data
-    predictor = EventNormalizedUFCPredictor()
+    predictor = EventNormalizedFightPredictor()
     
     # Run the full pipeline
     model, accuracy = predictor.run_full_pipeline()

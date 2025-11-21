@@ -1,5 +1,5 @@
 """
-Production-Ready UFC Weighted Ensemble Predictor
+Production-Ready Weighted Ensemble Predictor
 Achieves 91.33% accuracy using weighted combination of 4 models
 """
 
@@ -25,11 +25,12 @@ if sys.platform.startswith('win'):
     sys.stdout = codecs.getwriter('utf-8')(sys.stdout.detach())
     sys.stderr = codecs.getwriter('utf-8')(sys.stderr.detach())
 
-class UFCWeightedEnsemblePredictor:
-    """Production-ready weighted ensemble for UFC fight prediction"""
+class FightWeightedEnsemblePredictor:
+    """Production-ready weighted ensemble for fight prediction"""
     
     def __init__(self, model_dir=None):
-        self.model_dir = model_dir or os.path.join(os.path.dirname(__file__), '..', 'models', 'ensemble')
+        # Use project root models directory
+        self.model_dir = model_dir or os.path.join(os.path.dirname(__file__), '..', '..', '..', 'models', 'ensemble')
         self.base_dir = os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
         
         # Model configurations (optimized from ensemble experiment)
@@ -92,7 +93,7 @@ class UFCWeightedEnsemblePredictor:
         os.makedirs(self.model_dir, exist_ok=True)
     
     def load_and_prepare_data(self, data_path=None):
-        """Load and prepare UFC dataset for training"""
+        """Load and prepare fight dataset for training"""
         if data_path is None:
             data_path = os.path.join(self.base_dir, 'shared', 'data', 'event_normalized_large_dataset.csv')
         
@@ -329,6 +330,39 @@ class UFCWeightedEnsemblePredictor:
             print(f"❌ Failed to load ensemble: {e}")
             return False
     
+    def get_feature_importance(self):
+        """Calculate feature importance from tree-based models"""
+        if not self.is_trained:
+            return {}
+            
+        feature_importance = {}
+        total_weight = 0
+        
+        for model_name, config in self.model_configs.items():
+            model = self.models.get(model_name)
+            if not model:
+                continue
+                
+            weight = config['weight']
+            
+            # Only get importance from models that support it
+            if hasattr(model, 'feature_importances_'):
+                importances = model.feature_importances_
+                
+                for i, feature in enumerate(self.feature_columns):
+                    if feature not in feature_importance:
+                        feature_importance[feature] = 0
+                    feature_importance[feature] += importances[i] * weight
+                
+                total_weight += weight
+        
+        # Normalize
+        if total_weight > 0:
+            for feature in feature_importance:
+                feature_importance[feature] /= total_weight
+                
+        return feature_importance
+
     def predict(self, fight_data):
         """Make prediction for a single fight"""
         if not self.is_trained:
@@ -378,12 +412,16 @@ class UFCWeightedEnsemblePredictor:
         ensemble_prediction = "Red Fighter Wins" if ensemble_prob > 0.5 else "Blue Fighter Wins"
         confidence = max(ensemble_prob, 1 - ensemble_prob)
         
+        # Get feature importance
+        feature_importance = self.get_feature_importance()
+        
         return {
             'prediction': ensemble_prediction,
             'probability': ensemble_prob,
             'confidence': confidence,
             'individual_predictions': dict(zip(self.model_configs.keys(), individual_predictions)),
-            'winner': 'Red' if ensemble_prob > 0.5 else 'Blue'
+            'winner': 'Red' if ensemble_prob > 0.5 else 'Blue',
+            'feature_importance': feature_importance
         }
     
     def predict_fighters(self, red_fighter, blue_fighter):
@@ -534,6 +572,7 @@ class UFCWeightedEnsemblePredictor:
         result['blue_fighter'] = blue_fighter
         result['red_fighter_stats'] = convert_types(red_stats)
         result['blue_fighter_stats'] = convert_types(blue_stats)
+        result['fight_data'] = convert_types(fight_data)
         
         return result
     
@@ -591,7 +630,7 @@ def main():
     import argparse
     import json
     
-    parser = argparse.ArgumentParser(description='UFC Weighted Ensemble Predictor')
+    parser = argparse.ArgumentParser(description='Weighted Ensemble Predictor')
     parser.add_argument('--train', action='store_true', help='Train the ensemble')
     parser.add_argument('--predict', action='store_true', help='Interactive prediction mode')
     parser.add_argument('--info', action='store_true', help='Show ensemble information')
@@ -606,7 +645,7 @@ def main():
     args = parser.parse_args()
     
     # Initialize predictor
-    predictor = UFCWeightedEnsemblePredictor(model_dir=args.model_dir)
+    predictor = FightWeightedEnsemblePredictor(model_dir=args.model_dir)
     
     if args.red_fighter and args.blue_fighter:
         # Fighter-based prediction for API
@@ -668,7 +707,7 @@ def main():
             print(f"   {key}: {value}")
     
     else:
-        print("🥊 UFC Weighted Ensemble Predictor")
+        print("🥊 Weighted Ensemble Predictor")
         print("Usage:")
         print("  --train     Train the ensemble")
         print("  --predict   Interactive prediction mode") 

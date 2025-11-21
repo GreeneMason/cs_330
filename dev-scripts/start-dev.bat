@@ -1,13 +1,13 @@
 @echo off
 echo ============================================================
-echo 🚀 UFC PREDICTION SYSTEM - DEVELOPMENT MODE
+echo 🚀 FIGHT PREDICTION SYSTEM - DEVELOPMENT MODE
 echo ============================================================
 echo.
 
 cd /d "%~dp0\.."
 
 echo 📊 Starting Developer Dashboard...
-start "Dev Dashboard" cmd /k "cd dev-dashboard && ..\.venv\Scripts\python.exe app.py"
+start "Dev Dashboard" cmd /k "cd tools\dev-dashboard && ..\..\.venv\Scripts\python.exe app.py"
 
 timeout /t 2 /nobreak >nul
 

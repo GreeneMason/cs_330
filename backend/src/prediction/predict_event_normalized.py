@@ -15,8 +15,9 @@ class EventNormalizedPredictor:
     """Predictor using event-normalized dataset with event lookup"""
     
     def __init__(self):
-        self.model_dir = Path('models')
-        self.data_dir = Path('data')
+        # Use project root directories
+        self.model_dir = Path(__file__).parent.parent.parent.parent / 'models' / 'ensemble'
+        self.data_dir = Path(__file__).parent.parent.parent.parent / 'data'
         self.model = None
         self.scaler = None
         self.label_encoder = None
@@ -348,6 +349,43 @@ class EventNormalizedPredictor:
             
         except Exception as e:
             print(f"❌ Error making prediction: {e}")
+    
+    def predict_dict(self, fight_data):
+        """Predict from a dictionary of features"""
+        if self.model is None:
+            if not self.load_model():
+                return None
+        
+        try:
+            # Convert dict to DataFrame
+            df = pd.DataFrame([fight_data])
+            
+            # Ensure all features are present
+            for col in self.feature_columns:
+                if col not in df.columns:
+                    df[col] = 0
+            
+            # Select features in correct order
+            X = df[self.feature_columns]
+            
+            # Scale features
+            X_scaled = self.scaler.transform(X)
+            
+            # Predict
+            prob = self.model.predict_proba(X_scaled)[0][1]
+            prediction = "Red" if prob > 0.5 else "Blue"
+            confidence = max(prob, 1 - prob)
+            
+            return {
+                'prediction': prediction,
+                'probability': float(prob),
+                'confidence': float(confidence),
+                'winner': prediction
+            }
+            
+        except Exception as e:
+            print(f"❌ Error predicting from dict: {e}")
+            return None
 
 
 def main():

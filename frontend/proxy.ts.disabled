@@ -1,0 +1,10 @@
+// Temporarily disabled for testing - remove this file when you have Clerk keys
+// This allows testing frontend without authentication
+
+export default function proxy() {
+  // No authentication middleware
+}
+
+export const config = {
+  matcher: [],  // Don't match any routes
+};

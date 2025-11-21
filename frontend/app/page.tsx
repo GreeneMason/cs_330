@@ -1,19 +1,28 @@
 import { DashboardMetrics } from "@/components/features/analytics/dashboard-metrics";
 import { ModelPerformanceChart, ModelWeightsChart } from "@/components/features/analytics/model-performance-charts";
 import { QuickActions } from "@/components/features/analytics/quick-actions";
+import { SystemStatus } from "@/components/system/system-status";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { TrendingUp, Zap } from "lucide-react";
 
 export default function Dashboard() {
   return (
-    <div className="space-y-8" style={{ backgroundColor: '#000000', minHeight: '100vh', padding: '20px' }}>
+    <>
+      <div 
+        className="fixed inset-0 -z-10 animate-gradient-breathing"
+        style={{ 
+          backgroundColor: '#000000', 
+          backgroundImage: 'radial-gradient(circle at 50% 0%, rgba(60, 60, 60, 0.4) 0%, transparent 60%)',
+        }}
+      />
+      <div className="space-y-8" style={{ minHeight: '100vh', padding: '20px' }}>
       {/* Welcome Section */}
       <div className="flex flex-col gap-4">
         <div className="flex items-center justify-between">
           <div>
             <h1 className="text-3xl font-bold tracking-tight" style={{ color: '#ffffff' }}>
-              UFC Fight Predictor
+              Fight Predictor
             </h1>
             <p style={{ color: '#fca311' }}>
               Advanced AI ensemble achieving 91.33% prediction accuracy
@@ -29,6 +38,9 @@ export default function Dashboard() {
           </Badge>
         </div>
       </div>
+
+      {/* System Status Check */}
+      <SystemStatus />
 
       {/* Performance Metrics */}
       <DashboardMetrics />
@@ -104,5 +116,6 @@ export default function Dashboard() {
       {/* Quick Actions */}
       <QuickActions />
     </div>
+    </>
   );
 }

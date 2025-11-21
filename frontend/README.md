@@ -1,6 +1,6 @@
-# UFC Fight Prediction Frontend
+# Fight Prediction Frontend
 
-A modern Next.js application for UFC fight prediction using machine learning ensemble models.
+A modern Next.js application for fight prediction using machine learning ensemble models.
 
 ## 🚀 Tech Stack
 
@@ -52,7 +52,7 @@ A modern Next.js application for UFC fight prediction using machine learning ens
 ## 📁 Project Structure
 
 ```
-ufc-prediction-frontend/
+fight-prediction-frontend/
 ├── app/                          # Next.js App Router
 │   ├── page.tsx                 # Dashboard home
 │   ├── layout.tsx               # Root layout

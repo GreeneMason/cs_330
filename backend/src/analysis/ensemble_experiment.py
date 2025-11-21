@@ -1,5 +1,5 @@
 """
-UFC Fight Prediction Ensemble
+Fight Prediction Ensemble
 Combines Neural Network + Traditional ML models for superior performance
 """
 
@@ -22,7 +22,7 @@ warnings.filterwarnings('ignore')
 # Add training directory to path
 sys.path.append(os.path.join(os.path.dirname(__file__), '..', 'training'))
 
-class UFCEnsembleExperiment:
+class FightEnsembleExperiment:
     """Experiment with different ensemble combinations"""
     
     def __init__(self):
@@ -73,8 +73,8 @@ class UFCEnsembleExperiment:
         print(f"   ✅ Initialized {len(self.base_models)} base models")
     
     def load_and_prepare_data(self):
-        """Load and prepare the UFC dataset"""
-        print("🔄 Loading UFC fight data...")
+        """Load and prepare the fight dataset"""
+        print("🔄 Loading fight data...")
         
         # Load data
         data_path = os.path.join(self.base_dir, 'shared', 'data', 'event_normalized_large_dataset.csv')
@@ -401,7 +401,7 @@ class UFCEnsembleExperiment:
     def create_ensemble_visualizations(self):
         """Create ensemble experiment visualizations"""
         fig, axes = plt.subplots(2, 2, figsize=(15, 12))
-        fig.suptitle('UFC Fight Prediction - Ensemble Experiment Results', fontsize=16, fontweight='bold')
+        fig.suptitle('Fight Prediction - Ensemble Experiment Results', fontsize=16, fontweight='bold')
         
         # 1. Individual vs Ensemble Performance
         all_names = []
@@ -516,11 +516,11 @@ class UFCEnsembleExperiment:
         print(f"\n📈 Ensemble experiment visualizations saved to visualizations/ensemble_experiment.png")
 
 def main():
-    print("🥊 UFC Fight Prediction - Ensemble Experiment")
+    print("🥊 Fight Prediction - Ensemble Experiment")
     print("   Testing different ensemble combinations for superior performance")
     print("="*80)
     
-    experiment = UFCEnsembleExperiment()
+    experiment = FightEnsembleExperiment()
     experiment.load_and_prepare_data()
     experiment.train_individual_models()
     experiment.create_ensemble_combinations()

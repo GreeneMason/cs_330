@@ -33,8 +33,8 @@ class CompleteModelComparison:
         self.base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
         
     def load_and_prepare_data(self):
-        """Load and prepare the UFC dataset"""
-        print("🔄 Loading UFC fight data...")
+        """Load and prepare the fight dataset"""
+        print("🔄 Loading fight data...")
         
         # Load data
         data_path = os.path.join(self.base_dir, 'shared', 'data', 'event_normalized_large_dataset.csv')
@@ -446,7 +446,7 @@ class CompleteModelComparison:
         print(f"\n📈 Comprehensive visualizations saved to visualizations/complete_model_comparison.png")
 
 def main():
-    print("🥊 UFC Fight Prediction - Complete Model Comparison")
+    print("🥊 Fight Prediction - Complete Model Comparison")
     print("   Neural Network vs Traditional Machine Learning")
     print("="*70)
     

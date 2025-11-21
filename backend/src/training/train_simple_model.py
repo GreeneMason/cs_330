@@ -1,5 +1,5 @@
 """
-Simple ML Pipeline for UFC Fight Prediction
+Simple ML Pipeline for Fight Prediction
 Works directly with the normalized large_dataset.csv
 """
 
@@ -19,8 +19,8 @@ import warnings
 warnings.filterwarnings('ignore')
 
 
-class SimpleUFCPredictor:
-    """Simple but effective UFC fight predictor"""
+class SimpleFightPredictor:
+    """Simple but effective fight predictor"""
     
     def __init__(self, data_path='data/UFC dataset/Large set/large_dataset.csv'):
         self.data_path = data_path
@@ -248,7 +248,7 @@ class SimpleUFCPredictor:
     def run_pipeline(self):
         """Run the complete pipeline"""
         print("\n" + "🥊"*30)
-        print("UFC FIGHT PREDICTION - ML PIPELINE")
+        print("FIGHT PREDICTION - ML PIPELINE")
         print("🥊"*30)
         
         # Load data
@@ -282,5 +282,5 @@ class SimpleUFCPredictor:
 
 
 if __name__ == '__main__':
-    pipeline = SimpleUFCPredictor()
+    pipeline = SimpleFightPredictor()
     pipeline.run_pipeline()

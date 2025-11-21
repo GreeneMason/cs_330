@@ -1,5 +1,5 @@
 """
-Unified UFC Fight Prediction Interface
+Unified Fight Prediction Interface
 Supports Neural Network, Ensemble, and Simple models with model comparison
 """
 
@@ -15,8 +15,8 @@ sys.path.append('../prediction')
 
 from train_neural_network_hypertuned import HyperparameterTunedNeuralNetwork
 
-class UnifiedUFCPredictor:
-    """Unified interface for all UFC prediction models"""
+class UnifiedFightPredictor:
+    """Unified interface for all prediction models"""
     
     def __init__(self):
         self.models = {}
@@ -297,7 +297,7 @@ class UnifiedUFCPredictor:
             return None
 
 def main():
-    parser = argparse.ArgumentParser(description='UFC Fight Prediction - Unified Interface')
+    parser = argparse.ArgumentParser(description='Fight Prediction - Unified Interface')
     parser.add_argument('--model', choices=['neural_network', 'ensemble', 'simple', 'all'], 
                        default='neural_network', help='Model to use for prediction')
     parser.add_argument('--interactive', action='store_true', help='Start interactive mode')
@@ -306,7 +306,7 @@ def main():
     
     args = parser.parse_args()
     
-    predictor = UnifiedUFCPredictor()
+    predictor = UnifiedFightPredictor()
     
     if args.interactive:
         predictor.interactive_prediction()

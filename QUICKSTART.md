@@ -1,4 +1,4 @@
-# 🥊 UFC Fight Predictor - Quick Start Guide
+# 🥊 Fight Predictor - Quick Start Guide
 
 ## **⚡ Can't Activate Virtual Environment?**
 

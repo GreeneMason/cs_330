@@ -1,6 +1,6 @@
-# UFC Prediction Backend
+# Fight Prediction Backend
 
-Python-based machine learning backend for UFC fight prediction.
+Python-based machine learning backend for fight prediction.
 
 ## Features
 - 91.33% accurate weighted ensemble model

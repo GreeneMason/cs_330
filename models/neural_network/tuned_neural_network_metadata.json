@@ -1,0 +1,11 @@
+{
+  "model_type": "fighter_aware_neural_network",
+  "num_features": 90,
+  "red_features": 28,
+  "blue_features": 28,
+  "diff_features": 27,
+  "cv_mean_accuracy": 0.9099862456321717,
+  "cv_std_accuracy": 0.005241574437914702,
+  "training_date": "2025-11-20T19:22:09.532479",
+  "model_parameters": 31777
+}

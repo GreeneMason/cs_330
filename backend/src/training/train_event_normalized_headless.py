@@ -1,5 +1,5 @@
 """
-Simple ML Pipeline for UFC Fight Prediction (Headless Version)
+Simple ML Pipeline for Fight Prediction (Headless Version)
 Works with the event-normalized dataset - no plotting
 """
 
@@ -17,8 +17,8 @@ import warnings
 warnings.filterwarnings('ignore')
 
 
-class EventNormalizedUFCPredictorHeadless:
-    """UFC fight predictor using event-normalized data - no GUI plots"""
+class EventNormalizedFightPredictorHeadless:
+    """Fight predictor using event-normalized data - no GUI plots"""
     
     def __init__(self, data_path='../../shared/data/event_normalized_large_dataset.csv', 
                  events_path='data/events_reference.csv'):
@@ -305,7 +305,7 @@ class EventNormalizedUFCPredictorHeadless:
     
     def run_full_pipeline(self):
         """Run the complete training pipeline"""
-        print("🥊 EVENT-NORMALIZED UFC FIGHT PREDICTOR (HEADLESS)")
+        print("🥊 EVENT-NORMALIZED FIGHT PREDICTOR (HEADLESS)")
         print("=" * 60)
         
         # Load data
@@ -338,7 +338,7 @@ class EventNormalizedUFCPredictorHeadless:
 def main():
     """Main training script"""
     # Initialize predictor with event-normalized data
-    predictor = EventNormalizedUFCPredictorHeadless()
+    predictor = EventNormalizedFightPredictorHeadless()
     
     # Run the full pipeline
     model, accuracy = predictor.run_full_pipeline()

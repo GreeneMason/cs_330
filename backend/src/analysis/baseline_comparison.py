@@ -1,6 +1,6 @@
 """
 Baseline Model Comparison
-Compare different machine learning approaches on UFC fight prediction
+Compare different machine learning approaches on fight prediction
 """
 
 import pandas as pd
@@ -27,8 +27,8 @@ class BaselineComparison:
         self.results = {}
         
     def load_and_prepare_data(self):
-        """Load and prepare the UFC dataset"""
-        print("🔄 Loading UFC fight data...")
+        """Load and prepare the fight dataset"""
+        print("🔄 Loading fight data...")
         
         # Load data
         self.df = pd.read_csv('../../shared/data/event_normalized_large_dataset.csv')
@@ -175,7 +175,7 @@ class BaselineComparison:
             return
             
         fig, axes = plt.subplots(2, 2, figsize=(15, 12))
-        fig.suptitle('UFC Fight Prediction - Baseline Model Comparison', fontsize=16, fontweight='bold')
+        fig.suptitle('Fight Prediction - Baseline Model Comparison', fontsize=16, fontweight='bold')
         
         # 1. Accuracy comparison bar chart
         model_names = list(self.results.keys())
@@ -235,7 +235,7 @@ class BaselineComparison:
         print(f"\n📈 Visualizations saved to visualizations/baseline_model_comparison.png")
 
 def main():
-    print("🥊 UFC Fight Prediction - Baseline Model Comparison")
+    print("🥊 Fight Prediction - Baseline Model Comparison")
     print("="*60)
     
     comparator = BaselineComparison()

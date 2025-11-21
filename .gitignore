@@ -26,7 +26,7 @@ venv/
 .venv/
 ENV/
 
-# Environment Variables (SECURITY CRITICAL)
+# Environment Variables (SECURITY CRITICAL - NEVER COMMIT)
 .env
 .env.local
 .env.development.local
@@ -36,6 +36,19 @@ ENV/
 .env.production
 .env.staging
 *.env
+*/.env*
+frontend/.env*
+backend/.env*
+dev-dashboard/.env*
+
+# API Keys and Secrets
+**/secrets/
+**/*.key
+**/*.pem
+**/*.p12
+config/secrets/
+clerk.json
+.clerk/
 
 # IDEs
 .idea/
@@ -65,18 +78,34 @@ kaggle.json
 # API Keys and Credentials (SECURITY CRITICAL)
 **/config/secrets.json
 **/config/credentials.json
+**/auth.json
+**/keys/
+**/.secrets/
+**/credentials/
+*.credential
+*.secret
+
+# Clerk and Authentication
+.clerk/
+clerk.json
+auth0.json
+
+# Database credentials
+database.env
+db.env
+*.sqlite-journal
 **/*_credentials.json
 **/*_secrets.json
 **/*_keys.json
 **/auth_config.json
 
 # Large model files
-models/*.pkl
-models/*.joblib
-models/*.h5
-models/*.pt
-models/*.pth
-models/*.onnx
+models/**/*.pkl
+models/**/*.joblib
+models/**/*.h5
+models/**/*.pt
+models/**/*.pth
+models/**/*.onnx
 *.model
 *.weights
 
@@ -138,3 +167,18 @@ Thumbs.db
 *key*
 *token*
 *credential*
+
+# Data Migration Files
+scripts/fighter_migration_data.json
+frontend/public/fighter_migration_data.json
+data/temp/
+
+# Local Development & Debugging
+debug_*.py
+_archive/
+*.bak
+*.pdf
+coverage/
+.pytest_cache/
+htmlcov/
+.tox/

@@ -23,8 +23,8 @@ warnings.filterwarnings('ignore')
 class HyperparameterTunedNeuralNetwork:
     """Neural network with automated hyperparameter tuning"""
     
-    def __init__(self, data_path='../../shared/data/event_normalized_large_dataset.csv', 
-                 events_path='../data/events_reference.csv'):
+    def __init__(self, data_path='../../../data/event_normalized_large_dataset.csv', 
+                 events_path='../../../data/events_reference.csv'):
         self.data_path = data_path
         self.events_path = events_path
         self.best_model = None
@@ -37,11 +37,11 @@ class HyperparameterTunedNeuralNetwork:
         self.tuner = None
         
         # Directories
-        self.model_dir = Path('../models/neural_network')
+        self.model_dir = Path('../../../models/neural_network')
         self.model_dir.mkdir(parents=True, exist_ok=True)
-        self.tuning_dir = Path('../models/neural_network/tuning')
+        self.tuning_dir = Path('../../../models/neural_network/tuning')
         self.tuning_dir.mkdir(parents=True, exist_ok=True)
-        self.viz_dir = Path('../visualizations/neural_network')
+        self.viz_dir = Path('../../../visualizations/neural_network')
         self.viz_dir.mkdir(parents=True, exist_ok=True)
         
     def load_data(self):
@@ -331,7 +331,7 @@ class HyperparameterTunedNeuralNetwork:
         self.best_model = self.tuner.get_best_models(num_models=1)[0]
         
         # Save hyperparameters
-        hp_dict = {param: best_hps.get(param) for param in best_hps.space}
+        hp_dict = {param.name: best_hps.get(param.name) for param in best_hps.space}
         with open(self.model_dir / 'best_hyperparameters.json', 'w') as f:
             json.dump(hp_dict, f, indent=2, default=str)
         

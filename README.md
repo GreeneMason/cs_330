@@ -1,6 +1,6 @@
-# UFC Prediction System 🥊
+# Fight Prediction System 🥊
 
-A complete machine learning system for predicting UFC fight outcomes with 91.33% accuracy.
+A complete machine learning system for predicting fight outcomes with 91.33% accuracy.
 
 ## 🚀 Quick Start
 

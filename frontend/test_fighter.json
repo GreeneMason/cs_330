@@ -1,0 +1,16 @@
+{
+  "fighters": [
+    {
+      "name": "Jon Jones",
+      "weightClass": "Heavyweight",
+      "wins": 27,
+      "losses": 1,
+      "draws": 0,
+      "height": 193.04,
+      "weight": 106.59,
+      "reach": 215.9,
+      "stance": "Orthodox",
+      "age": 36
+    }
+  ]
+}

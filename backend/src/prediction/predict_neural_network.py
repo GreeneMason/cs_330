@@ -17,8 +17,9 @@ class EventNormalizedNeuralNetworkPredictor:
     """Neural network predictor using event-normalized dataset with event lookup"""
     
     def __init__(self):
-        self.model_dir = Path('models/neural_network')
-        self.data_dir = Path('data')
+        # Use project root directories
+        self.model_dir = Path(__file__).parent.parent.parent.parent / 'models' / 'neural_network'
+        self.data_dir = Path(__file__).parent.parent.parent.parent / 'data'
         self.model = None
         self.scaler = None
         self.label_encoder = None
@@ -31,16 +32,24 @@ class EventNormalizedNeuralNetworkPredictor:
         """Load the trained neural network model and preprocessing components"""
         try:
             # Load neural network model
-            model_path = self.model_dir / 'best_neural_network_model.h5'
+            model_path = self.model_dir / 'best_tuned_neural_network_model.h5'
             if model_path.exists():
-                self.model = tf.keras.models.load_model(model_path)
-                print("✓ Loaded neural network model")
+                print(f"Attempting to load model from {model_path}")
+                try:
+                    # Try with safe_mode=False for Lambda layers
+                    self.model = tf.keras.models.load_model(model_path, safe_mode=False)
+                    print("✓ Loaded neural network model (safe_mode=False)")
+                except TypeError:
+                    # Fallback for older versions
+                    print("Falling back to standard load_model")
+                    self.model = tf.keras.models.load_model(model_path)
+                    print("✓ Loaded neural network model")
             else:
-                print("❌ Neural network model not found. Please run training first.")
+                print(f"❌ Neural network model not found at {model_path}. Please run training first.")
                 return False
             
             # Load preprocessing components
-            scaler_path = self.model_dir / 'neural_network_scaler.pkl'
+            scaler_path = self.model_dir / 'tuned_neural_network_scaler.pkl'
             if scaler_path.exists():
                 self.scaler = joblib.load(scaler_path)
                 print("✓ Loaded feature scaler")
@@ -48,7 +57,7 @@ class EventNormalizedNeuralNetworkPredictor:
                 print("❌ Scaler not found")
                 return False
             
-            encoder_path = self.model_dir / 'neural_network_label_encoder.pkl'
+            encoder_path = self.model_dir / 'tuned_neural_network_label_encoder.pkl'
             if encoder_path.exists():
                 self.label_encoder = joblib.load(encoder_path)
                 print("✓ Loaded label encoder")
@@ -56,7 +65,7 @@ class EventNormalizedNeuralNetworkPredictor:
                 print("❌ Label encoder not found")
                 return False
             
-            features_path = self.model_dir / 'neural_network_features.pkl'
+            features_path = self.model_dir / 'tuned_neural_network_features.pkl'
             if features_path.exists():
                 self.feature_columns = joblib.load(features_path)
                 print(f"✓ Loaded feature list ({len(self.feature_columns)} features)")
@@ -64,19 +73,12 @@ class EventNormalizedNeuralNetworkPredictor:
                 print("❌ Feature list not found")
                 return False
             
-            # Load feature categories (for fighter-aware processing)
-            categories_path = self.model_dir / 'neural_network_feature_categories.pkl'
-            if categories_path.exists():
-                self.feature_categories = joblib.load(categories_path)
-                print("✓ Loaded feature categories")
-            
             # Load metadata
-            metadata_path = self.model_dir / 'neural_network_metadata.json'
+            metadata_path = self.model_dir / 'tuned_neural_network_metadata.json'
             if metadata_path.exists():
                 with open(metadata_path, 'r') as f:
                     self.metadata = json.load(f)
                 print(f"✓ Model trained on {self.metadata.get('training_date', 'unknown date')}")
-                print(f"✓ Cross-validation accuracy: {self.metadata.get('cv_mean_accuracy', 0):.4f}")
             
             return True
             
@@ -91,16 +93,20 @@ class EventNormalizedNeuralNetworkPredictor:
             return None
         
         try:
+            # Convert dict to DataFrame if needed
+            if isinstance(fighter_stats, dict):
+                fighter_stats = pd.DataFrame([fighter_stats])
+
             # Ensure all required features are present
             missing_features = [f for f in self.feature_columns if f not in fighter_stats.columns]
             if missing_features:
-                print(f"⚠️  Missing features: {missing_features[:5]}...")
+                # print(f"⚠️  Missing features: {missing_features[:5]}...")
                 # Fill missing features with zeros (or medians from training)
                 for feature in missing_features:
                     fighter_stats[feature] = 0
             
             # Select and order features
-            X = fighter_stats[self.feature_columns].values.reshape(1, -1)
+            X = fighter_stats[self.feature_columns]
             
             # Scale features
             X_scaled = self.scaler.transform(X)

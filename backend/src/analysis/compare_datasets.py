@@ -60,12 +60,12 @@ print("""
 
 4. 🗄️ CREATED RELATIONAL DATABASE:
    - Split into 4 tables (3NF): events, fighters, fights, fight_statistics
-   - Saved as normalized_ufc.db
+   - Saved as normalized_fight.db
    - Maintains data integrity and reduces redundancy
 
 5. 💾 OUTPUT:
    - Clean CSV: normalized_large_dataset.csv (101 columns)
-   - Database: normalized_ufc.db (4 tables)
+   - Database: normalized_fight.db (4 tables)
    - Zero null values, all data ready for ML
 """)
 

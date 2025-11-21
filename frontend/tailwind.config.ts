@@ -9,8 +9,8 @@ export default {
   theme: {
     extend: {
       colors: {
-        // UFC Fight Predictor Brand Colors
-        'ufc': {
+        // Fight Predictor Brand Colors
+        'brand': {
           'black': '#000000',
           'rich-black': '#0a111f',
           'oxford-blue': '#14213d',
@@ -20,9 +20,6 @@ export default {
           'platinum': '#e5e5e5',
           'white-smoke': '#f2f2f2',
           'white': '#ffffff',
-        },
-        // Semantic color mappings
-        'brand': {
           'primary': '#fca311',      // Orange Web
           'secondary': '#886227',    // Golden Brown
           'accent': '#f1c47b',       // Sunset

@@ -1,5 +1,5 @@
 """
-Neural Network Pipeline for UFC Fight Prediction
+Neural Network Pipeline for Fight Prediction
 Uses fighter-aware architecture that processes red and blue fighter features separately
 Compatible with existing event-normalized dataset interface
 """
@@ -23,8 +23,8 @@ warnings.filterwarnings('ignore')
 class EventNormalizedNeuralNetwork:
     """Neural network predictor using event-normalized data with fighter-aware architecture"""
     
-    def __init__(self, data_path='../../shared/data/event_normalized_large_dataset.csv', 
-                 events_path='data/events_reference.csv'):
+    def __init__(self, data_path='../../../data/event_normalized_large_dataset.csv', 
+                 events_path='../../../data/events_reference.csv'):
         self.data_path = data_path
         self.events_path = events_path
         self.model = None
@@ -37,11 +37,11 @@ class EventNormalizedNeuralNetwork:
         self.scaler = StandardScaler()
         
         # Neural network specific directories
-        self.model_dir = Path('models/neural_network')
+        self.model_dir = Path('../../../models/neural_network')
         self.model_dir.mkdir(parents=True, exist_ok=True)
         
         # Visualization directory
-        self.viz_dir = Path('visualizations/neural_network')
+        self.viz_dir = Path('../../../visualizations/neural_network')
         self.viz_dir.mkdir(parents=True, exist_ok=True)
         
     def load_data(self):
@@ -247,7 +247,7 @@ class EventNormalizedNeuralNetwork:
         outputs = tf.keras.layers.Dense(1, activation='sigmoid', name='winner_prediction')(x)
         
         # Create model
-        model = tf.keras.Model(inputs=inputs, outputs=outputs, name='FighterAwareUFCPredictor')
+        model = tf.keras.Model(inputs=inputs, outputs=outputs, name='FighterAwareFightPredictor')
         
         # Compile model
         model.compile(
@@ -263,7 +263,7 @@ class EventNormalizedNeuralNetwork:
         model_summary = []
         model.summary(print_fn=lambda x: model_summary.append(x))
         
-        with open(self.model_dir / 'model_architecture.txt', 'w') as f:
+        with open(self.model_dir / 'model_architecture.txt', 'w', encoding='utf-8') as f:
             f.write('\n'.join(model_summary))
         
         return model
@@ -521,7 +521,7 @@ class EventNormalizedNeuralNetwork:
     def run_complete_training(self):
         """Run the complete training pipeline"""
         print("🥊 NEURAL NETWORK TRAINING PIPELINE")
-        print("Fighter-Aware Architecture for UFC Fight Prediction")
+        print("Fighter-Aware Architecture for Fight Prediction")
         print("=" * 80)
         
         # Load data
