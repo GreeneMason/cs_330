@@ -51,8 +51,9 @@ interface PredictionVisualizationProps {
 }
 
 export function PredictionVisualization({ result, models }: PredictionVisualizationProps) {
-  const winnerName = result.prediction === 'Red' ? result.red_fighter : result.blue_fighter;
-  const loserName = result.prediction === 'Red' ? result.blue_fighter : result.red_fighter;
+  const isRedWinner = result.prediction.includes('Red');
+  const winnerName = isRedWinner ? result.red_fighter : result.blue_fighter;
+  const loserName = isRedWinner ? result.blue_fighter : result.red_fighter;
   const confidencePercent = Math.round(result.confidence * 100);
 
   // Prepare data for Radar Chart
@@ -105,8 +106,8 @@ export function PredictionVisualization({ result, models }: PredictionVisualizat
     <div className="space-y-6 animate-in fade-in slide-in-from-bottom-4 duration-500">
       {/* Main Result Card */}
       <Card 
-        className="border-2 border-[#fca311] bg-black/50 backdrop-blur-sm"
-        style={{ boxShadow: '0 0 25px rgba(252, 163, 17, 0.25)' }}
+        className="border-2 border-[#ff002b] bg-[#00043a]/50 backdrop-blur-sm"
+        style={{ boxShadow: '0 0 25px rgba(255, 0, 43, 0.25)' }}
       >
         <CardHeader className="text-center pb-2">
           <CardTitle className="text-4xl font-black text-white tracking-tighter uppercase">
@@ -134,12 +135,12 @@ export function PredictionVisualization({ result, models }: PredictionVisualizat
             return (
               <Card 
                 key={key} 
-                className="border border-[#fca311]/50 bg-black/30"
-                style={{ boxShadow: '0 0 15px rgba(252, 163, 17, 0.15)' }}
+                className="border border-[#ff002b]/50 bg-[#00043a]/30"
+                style={{ boxShadow: '0 0 15px rgba(255, 0, 43, 0.15)' }}
               >
                 <CardHeader className="pb-2">
                   <CardTitle className="text-lg font-bold text-white">{model.name}</CardTitle>
-                  <CardDescription className="text-[#fca311]">{model.accuracy} Accuracy</CardDescription>
+                  <CardDescription className="text-[#ff002b]">{model.accuracy} Accuracy</CardDescription>
                 </CardHeader>
                 <CardContent>
                   <div className="flex justify-between items-center mb-2">
@@ -160,12 +161,12 @@ export function PredictionVisualization({ result, models }: PredictionVisualizat
       )}
 
       <Tabs defaultValue="stats" className="w-full">
-        <TabsList className="grid w-full grid-cols-2 bg-black/50 border border-gray-800">
-          <TabsTrigger value="stats" className="data-[state=active]:bg-[#fca311] data-[state=active]:text-black">
+        <TabsList className="grid w-full grid-cols-2 bg-[#00043a]/50 border border-[#ff002b]/30">
+          <TabsTrigger value="stats" className="data-[state=active]:bg-[#ff002b] data-[state=active]:text-white">
             <Activity className="w-4 h-4 mr-2" />
             Fighter Comparison
           </TabsTrigger>
-          <TabsTrigger value="factors" className="data-[state=active]:bg-[#fca311] data-[state=active]:text-black">
+          <TabsTrigger value="factors" className="data-[state=active]:bg-[#ff002b] data-[state=active]:text-white">
             <Brain className="w-4 h-4 mr-2" />
             Key Factors
           </TabsTrigger>
@@ -176,7 +177,7 @@ export function PredictionVisualization({ result, models }: PredictionVisualizat
           <Card className="bg-black/50 border-gray-800">
             <CardHeader>
               <CardTitle className="text-lg text-white flex items-center">
-                <Activity className="w-4 h-4 mr-2 text-[#fca311]" />
+                <Activity className="w-4 h-4 mr-2 text-[#ff002b]" />
                 Fighter Comparison
               </CardTitle>
             </CardHeader>
@@ -249,9 +250,9 @@ export function PredictionVisualization({ result, models }: PredictionVisualizat
                       <Tooltip 
                         cursor={{ fill: 'transparent' }}
                         contentStyle={{ backgroundColor: '#000', border: '1px solid #333' }}
-                        itemStyle={{ color: '#fca311' }}
+                        itemStyle={{ color: '#ff002b' }}
                       />
-                      <Bar dataKey="value" fill="#fca311" radius={[0, 4, 4, 0]}>
+                      <Bar dataKey="value" fill="#ff002b" radius={[0, 4, 4, 0]}>
                         {featureData.map((entry, index) => (
                           <Cell key={`cell-${index}`} fillOpacity={0.8} />
                         ))}

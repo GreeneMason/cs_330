@@ -1,121 +1,46 @@
-import { DashboardMetrics } from "@/components/features/analytics/dashboard-metrics";
-import { ModelPerformanceChart, ModelWeightsChart } from "@/components/features/analytics/model-performance-charts";
-import { QuickActions } from "@/components/features/analytics/quick-actions";
-import { SystemStatus } from "@/components/system/system-status";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { TrendingUp, Zap } from "lucide-react";
+'use client';
+
+import Link from "next/link";
+import { Zap } from "lucide-react";
+import { useState } from "react";
 
 export default function Dashboard() {
+  const [isHovered, setIsHovered] = useState(false);
+
   return (
     <>
       <div 
-        className="fixed inset-0 -z-10 animate-gradient-breathing"
+        className="fixed inset-0 -z-10"
         style={{ 
-          backgroundColor: '#000000', 
-          backgroundImage: 'radial-gradient(circle at 50% 0%, rgba(60, 60, 60, 0.4) 0%, transparent 60%)',
+          backgroundColor: '#00043a',
         }}
       />
-      <div className="space-y-8" style={{ minHeight: '100vh', padding: '20px' }}>
-      {/* Welcome Section */}
-      <div className="flex flex-col gap-4">
-        <div className="flex items-center justify-between">
-          <div>
-            <h1 className="text-3xl font-bold tracking-tight" style={{ color: '#ffffff' }}>
-              Fight Predictor
-            </h1>
-            <p style={{ color: '#fca311' }}>
-              Advanced AI ensemble achieving 91.33% prediction accuracy
-            </p>
-          </div>
-          <Badge style={{ 
-            backgroundColor: '#fca311', 
-            color: '#000000',
-            border: 'none'
-          }}>
-            <Zap className="h-3 w-3 mr-1" />
-            Models Active
-          </Badge>
-        </div>
+      <div className="flex items-center justify-center" style={{ minHeight: '100vh' }}>
+        <Link href="/predict">
+          <button
+            className="group relative px-10 py-5 text-xl font-bold text-white rounded-2xl transition-all duration-300 hover:scale-110 active:scale-95 hover:shadow-[0_0_60px_rgba(255,0,43,0.8),0_0_100px_rgba(255,0,43,0.5)]"
+            style={{
+              background: 'linear-gradient(135deg, #ff002b 0%, #c00021 100%)',
+              boxShadow: '0 0 40px rgba(255, 0, 43, 0.6), 0 0 80px rgba(255, 0, 43, 0.3), inset 0 0 20px rgba(255, 255, 255, 0.2)',
+              border: '2px solid rgba(255, 255, 255, 0.3)',
+            }}
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)}
+          >
+            <span className="flex items-center gap-3">
+              <Zap className="w-6 h-6" />
+              Select Matchup
+            </span>
+            <div 
+              className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+              style={{
+                background: 'radial-gradient(circle at center, rgba(255, 255, 255, 0.2) 0%, transparent 70%)',
+                animation: 'pulse 2s ease-in-out infinite',
+              }}
+            />
+          </button>
+        </Link>
       </div>
-
-      {/* System Status Check */}
-      <SystemStatus />
-
-      {/* Performance Metrics */}
-      <DashboardMetrics />
-
-      {/* Charts Section */}
-      <div className="grid gap-6 md:grid-cols-2">
-        <ModelPerformanceChart />
-        <ModelWeightsChart />
-      </div>
-
-      {/* System Status */}
-      <Card style={{ background: '#14213d', color: '#ffffff', border: '1px solid #fca311' }}>
-        <CardHeader>
-          <CardTitle className="flex items-center gap-2" style={{ color: '#ffffff' }}>
-            <TrendingUp className="h-5 w-5" style={{ color: '#fca311' }} />
-            System Status
-          </CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="grid gap-4 md:grid-cols-3">
-            <div className="flex items-center justify-between p-4 border rounded-lg" style={{ 
-              borderColor: '#fca311',
-              backgroundColor: '#000000'
-            }}>
-              <div>
-                <p className="text-sm font-medium" style={{ color: '#ffffff' }}>Ensemble Model</p>
-                <p className="text-xs" style={{ color: '#fca311' }}>4 models active</p>
-              </div>
-              <Badge style={{ 
-                backgroundColor: '#fca311', 
-                color: '#000000',
-                border: 'none'
-              }}>
-                Ready
-              </Badge>
-            </div>
-            <div className="flex items-center justify-between p-4 border rounded-lg" style={{ 
-              borderColor: '#fca311',
-              backgroundColor: '#000000'
-            }}>
-              <div>
-                <p className="text-sm font-medium" style={{ color: '#ffffff' }}>Data Pipeline</p>
-                <p className="text-xs" style={{ color: '#fca311' }}>5,951 training samples</p>
-              </div>
-              <Badge style={{ 
-                backgroundColor: '#fca311', 
-                color: '#000000',
-                border: 'none'
-              }}>
-                Updated
-              </Badge>
-            </div>
-            <div className="flex items-center justify-between p-4 border rounded-lg" style={{ 
-              borderColor: '#fca311',
-              backgroundColor: '#000000'
-            }}>
-              <div>
-                <p className="text-sm font-medium" style={{ color: '#ffffff' }}>Predictions</p>
-                <p className="text-xs" style={{ color: '#fca311' }}>Real-time inference</p>
-              </div>
-              <Badge style={{ 
-                backgroundColor: '#fca311', 
-                color: '#000000',
-                border: 'none'
-              }}>
-                Active
-              </Badge>
-            </div>
-          </div>
-        </CardContent>
-      </Card>
-
-      {/* Quick Actions */}
-      <QuickActions />
-    </div>
     </>
   );
 }

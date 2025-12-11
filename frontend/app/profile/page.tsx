@@ -8,7 +8,7 @@ export default function ProfilePage() {
           <h1 className="text-3xl font-bold tracking-tight" style={{ color: '#ffffff' }}>
             My Profile
           </h1>
-          <p style={{ color: '#fca311' }}>
+          <p style={{ color: '#ff002b' }}>
             Manage your account settings and view your prediction stats
           </p>
         </div>

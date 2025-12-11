@@ -4,31 +4,36 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
-  /* UFC Fight Predictor Brand Colors - New Scheme */
-  --color-oxford-blue: #14213d;
+  /* New Color Palette */
+  --color-dark-wine: #800016;
+  --color-ruby-red: #a0001c;
+  --color-brick-red: #c00021;
+  --color-racing-red: #ff002b;
   --color-white: #ffffff;
-  --color-orange-web: #fca311;
-  --color-black: #000000;
+  --color-steel-blue: #407ba7;
+  --color-steel-azure: #004e89;
+  --color-imperial-blue: #002962;
+  --color-deep-navy: #00043a;
 
   /* Brand Semantic Colors */
-  --color-brand-primary: #fca311;
-  --color-brand-secondary: #14213d;
-  --color-brand-accent: #ffffff;
-  --color-brand-dark: #000000;
-  --color-brand-darker: #14213d;
+  --color-brand-primary: #ff002b;
+  --color-brand-secondary: #004e89;
+  --color-brand-accent: #407ba7;
+  --color-brand-dark: #00043a;
+  --color-brand-darker: #002962;
   --color-brand-light: #ffffff;
 
   /* Chart Colors */
-  --color-chart-1: #fca311;
-  --color-chart-2: #14213d;
-  --color-chart-3: #ffffff;
-  --color-chart-4: #000000;
+  --color-chart-1: #ff002b;
+  --color-chart-2: #c00021;
+  --color-chart-3: #004e89;
+  --color-chart-4: #407ba7;
 
   /* Status Colors */
-  --color-status-success: #fca311;
-  --color-status-warning: #14213d;
-  --color-status-info: #ffffff;
-  --color-status-neutral: #000000;
+  --color-status-success: #ff002b;
+  --color-status-warning: #c00021;
+  --color-status-info: #407ba7;
+  --color-status-neutral: #002962;
 
   /* Original ShadCN Variables */
   --color-background: var(--background);
@@ -150,4 +155,25 @@
 
 .animate-gradient-breathing {
   animation: gradient-breathing 10s ease-in-out infinite;
+}
+
+@keyframes dramatic-gradient-sweep {
+  0% {
+    background: radial-gradient(circle at 50% 50%, #00043a 100%, #00043a 100%);
+  }
+  20% {
+    background: radial-gradient(circle at 50% 50%, #ff002b 0%, #00043a 30%, #00043a 100%);
+  }
+  40% {
+    background: radial-gradient(circle at 50% 50%, #ff002b 0%, #c00021 20%, #00043a 50%, #00043a 100%);
+  }
+  60% {
+    background: radial-gradient(circle at 50% 50%, #ff002b 0%, #c00021 25%, #002962 50%, #00043a 75%, #00043a 100%);
+  }
+  80% {
+    background: radial-gradient(circle at 50% 50%, #ff002b 0%, #c00021 30%, #002962 50%, #004e89 70%, #00043a 100%);
+  }
+  100% {
+    background: radial-gradient(circle at 50% 50%, #ff002b 0%, #c00021 25%, #002962 50%, #004e89 75%, #407ba7 100%);
+  }
 }

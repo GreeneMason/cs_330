@@ -32,10 +32,10 @@ export function MetricCard({ title, value, description, trend, icon, cardStyle }
         {trend && (
           <div className="flex items-center mt-1">
             <TrendingUp className={`h-3 w-3 mr-1`} style={{
-              color: cardStyle?.color === '#000000' ? '#14213d' : '#fca311'
+              color: cardStyle?.color === '#000000' ? '#002962' : '#ff002b'
             }} />
             <span className={`text-xs`} style={{
-              color: cardStyle?.color === '#000000' ? '#14213d' : '#fca311'
+              color: cardStyle?.color === '#000000' ? '#002962' : '#ff002b'
             }}>
               {trend === "up" ? "Improving" : trend === "down" ? "Declining" : "Stable"}
             </span>
@@ -65,10 +65,10 @@ export function DashboardMetrics() {
         value={metrics.ensembleAccuracy}
         description="Best performing model combination"
         trend="up"
-        icon={<Target className="h-4 w-4" style={{ color: '#000000' }} />}
+        icon={<Target className="h-4 w-4" style={{ color: '#00043a' }} />}
         cardStyle={{ 
-          background: '#fca311',
-          color: '#000000'
+          background: '#ff002b',
+          color: '#ffffff'
         }}
       />
       
@@ -77,9 +77,9 @@ export function DashboardMetrics() {
         value={metrics.aucScore}
         description="Area under ROC curve"
         trend="up"
-        icon={<TrendingUp className="h-4 w-4" style={{ color: '#fca311' }} />}
+        icon={<TrendingUp className="h-4 w-4" style={{ color: '#ff002b' }} />}
         cardStyle={{ 
-          background: '#14213d',
+          background: '#002962',
           color: '#ffffff'
         }}
       />
@@ -99,11 +99,11 @@ export function DashboardMetrics() {
         title="Last Updated"
         value={metrics.trainingDate}
         description={`${metrics.modelsCount} models active`}
-        icon={<Clock className="h-4 w-4" style={{ color: '#fca311' }} />}
+        icon={<Clock className="h-4 w-4" style={{ color: '#ff002b' }} />}
         cardStyle={{ 
-          background: '#000000',
+          background: '#00043a',
           color: '#ffffff',
-          border: '1px solid #fca311'
+          border: '1px solid #ff002b'
         }}
       />
     </div>

@@ -21,13 +21,13 @@ const modelPerformanceData = [
     name: "Gradient Boosting",
     accuracy: 90.99,
     weight: 25.1,
-    color: "#fca311" // Orange Web
+    color: "#ff002b" // Racing Red
   },
   {
     name: "SVM",
     accuracy: 90.79,
     weight: 25.1,
-    color: "#14213d" // Oxford Blue
+    color: "#002962" // Imperial Blue
   },
   {
     name: "Neural Network",
@@ -39,35 +39,35 @@ const modelPerformanceData = [
     name: "Random Forest",
     accuracy: 89.31,
     weight: 24.7,
-    color: "#000000" // Black
+    color: "#00043a" // Deep Navy
   },
   {
     name: "Weighted Ensemble",
     accuracy: 91.33,
     weight: 100,
-    color: "#fca311" // Orange Web
+    color: "#ff002b" // Racing Red
   }
 ];
 
 const modelWeightsData = [
-  { name: "Gradient Boosting", value: 25.1, color: "#fca311" },
-  { name: "SVM", value: 25.1, color: "#14213d" },
+  { name: "Gradient Boosting", value: 25.1, color: "#ff002b" },
+  { name: "SVM", value: 25.1, color: "#002962" },
   { name: "Neural Network", value: 25.1, color: "#ffffff" },
-  { name: "Random Forest", value: 24.7, color: "#000000" }
+  { name: "Random Forest", value: 24.7, color: "#00043a" }
 ];
 
 export function ModelPerformanceChart() {
   return (
-    <Card style={{ background: '#14213d', color: '#ffffff', border: '1px solid #fca311' }}>
+    <Card style={{ background: '#002962', color: '#ffffff', border: '1px solid #ff002b' }}>
       <CardHeader>
         <CardTitle className="flex items-center justify-between" style={{ color: '#ffffff' }}>
           Model Performance Comparison
           <Badge 
             variant="outline" 
             style={{ 
-              borderColor: '#fca311', 
-              color: '#fca311',
-              backgroundColor: '#000000' 
+              borderColor: '#ff002b', 
+              color: '#ff002b',
+              backgroundColor: '#00043a' 
             }}
           >
             91.33% Best
@@ -77,7 +77,7 @@ export function ModelPerformanceChart() {
       <CardContent>
         <ResponsiveContainer width="100%" height={300}>
           <BarChart data={modelPerformanceData} margin={{ top: 20, right: 30, left: 20, bottom: 5 }}>
-            <CartesianGrid strokeDasharray="3 3" stroke="#fca311" opacity={0.3} />
+            <CartesianGrid strokeDasharray="3 3" stroke="#ff002b" opacity={0.3} />
             <XAxis 
               dataKey="name" 
               angle={-45}
@@ -94,8 +94,8 @@ export function ModelPerformanceChart() {
             <Tooltip 
               formatter={(value: number) => [`${value}%`, 'Accuracy']}
               contentStyle={{
-                backgroundColor: '#000000',
-                border: '1px solid #fca311',
+                backgroundColor: '#00043a',
+                border: '1px solid #ff002b',
                 borderRadius: '8px',
                 color: '#ffffff'
               }}
@@ -105,7 +105,7 @@ export function ModelPerformanceChart() {
               radius={[4, 4, 0, 0]}
             >
               {modelPerformanceData.map((entry, index) => (
-                <Cell key={`cell-${index}`} fill={entry.color} stroke="#fca311" strokeWidth={entry.color === '#ffffff' ? 2 : 0} />
+                <Cell key={`cell-${index}`} fill={entry.color} stroke="#ff002b" strokeWidth={entry.color === '#ffffff' ? 2 : 0} />
               ))}
             </Bar>
           </BarChart>
@@ -140,7 +140,7 @@ export function ModelWeightsChart() {
   };
 
   return (
-    <Card style={{ background: '#ffffff', color: '#000000', border: '1px solid #fca311' }}>
+    <Card style={{ background: '#ffffff', color: '#000000', border: '1px solid #ff002b' }}>
       <CardHeader>
         <CardTitle style={{ color: '#000000' }}>Model Weights in Ensemble</CardTitle>
       </CardHeader>
@@ -156,18 +156,18 @@ export function ModelWeightsChart() {
               outerRadius={80}
               fill="#8884d8"
               dataKey="value"
-              stroke="#fca311"
+              stroke="#ff002b"
               strokeWidth={2}
             >
               {modelWeightsData.map((entry, index) => (
-                <Cell key={`cell-${index}`} fill={entry.color} stroke="#fca311" strokeWidth={2} />
+                <Cell key={`cell-${index}`} fill={entry.color} stroke="#ff002b" strokeWidth={2} />
               ))}
             </Pie>
             <Tooltip 
               formatter={(value: number) => [`${value}%`, 'Weight']}
               contentStyle={{
-                backgroundColor: '#000000',
-                border: '1px solid #fca311',
+                backgroundColor: '#00043a',
+                border: '1px solid #ff002b',
                 borderRadius: '8px',
                 color: '#ffffff'
               }}

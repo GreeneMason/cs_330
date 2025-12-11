@@ -52,16 +52,16 @@ function PredictionCard({ prediction, onDelete, showDeleteButton = false }: Pred
   };
 
   return (
-    <Card className="mb-4" style={{ background: '#14213d', border: '1px solid #fca311' }}>
+    <Card className="mb-4" style={{ background: '#002962', border: '1px solid #ff002b' }}>
       <CardHeader className="pb-3">
         <div className="flex items-center justify-between">
           <div className="flex items-center space-x-3">
-            <Trophy className="h-5 w-5" style={{ color: '#fca311' }} />
+            <Trophy className="h-5 w-5" style={{ color: '#ff002b' }} />
             <div>
               <CardTitle className="text-base" style={{ color: '#ffffff' }}>
                 {prediction.fighter1Name} vs {prediction.fighter2Name}
               </CardTitle>
-              <CardDescription style={{ color: '#fca311' }}>
+              <CardDescription style={{ color: '#ff002b' }}>
                 {prediction.eventName || 'Fight Event'}
               </CardDescription>
             </div>
@@ -185,20 +185,20 @@ export function PredictionHistory() {
     <div className="space-y-6">
       {/* Statistics Overview */}
       <div className="grid gap-4 md:grid-cols-4">
-        <Card style={{ background: '#14213d', color: '#ffffff', border: '1px solid #fca311' }}>
+        <Card style={{ background: '#002962', color: '#ffffff', border: '1px solid #ff002b' }}>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">Total Predictions</CardTitle>
-            <BarChart3 className="h-4 w-4" style={{ color: '#fca311' }} />
+            <BarChart3 className="h-4 w-4" style={{ color: '#ff002b' }} />
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">{predictionStats.totalPredictions}</div>
           </CardContent>
         </Card>
 
-        <Card style={{ background: '#14213d', color: '#ffffff', border: '1px solid #fca311' }}>
+        <Card style={{ background: '#002962', color: '#ffffff', border: '1px solid #ff002b' }}>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">Accuracy</CardTitle>
-            <Trophy className="h-4 w-4" style={{ color: '#fca311' }} />
+            <Trophy className="h-4 w-4" style={{ color: '#ff002b' }} />
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">{predictionStats.accuracy}%</div>
@@ -208,10 +208,10 @@ export function PredictionHistory() {
           </CardContent>
         </Card>
 
-        <Card style={{ background: '#14213d', color: '#ffffff', border: '1px solid #fca311' }}>
+        <Card style={{ background: '#002962', color: '#ffffff', border: '1px solid #ff002b' }}>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">Pending</CardTitle>
-            <Clock className="h-4 w-4" style={{ color: '#fca311' }} />
+            <Clock className="h-4 w-4" style={{ color: '#ff002b' }} />
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">{predictionStats.pendingPredictions}</div>
@@ -219,10 +219,10 @@ export function PredictionHistory() {
           </CardContent>
         </Card>
 
-        <Card style={{ background: '#14213d', color: '#ffffff', border: '1px solid #fca311' }}>
+        <Card style={{ background: '#002962', color: '#ffffff', border: '1px solid #ff002b' }}>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">Avg Confidence</CardTitle>
-            <TrendingUp className="h-4 w-4" style={{ color: '#fca311' }} />
+            <TrendingUp className="h-4 w-4" style={{ color: '#ff002b' }} />
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">{predictionStats.averageConfidence}%</div>
@@ -241,14 +241,14 @@ export function PredictionHistory() {
 
         <TabsContent value="all" className="space-y-4">
           {allPredictions?.length === 0 ? (
-            <Card style={{ background: '#14213d', color: '#ffffff', border: '1px solid #fca311' }}>
+            <Card style={{ background: '#002962', color: '#ffffff', border: '1px solid #ff002b' }}>
               <CardContent className="text-center py-12">
-                <Trophy className="h-12 w-12 mx-auto mb-4" style={{ color: '#fca311' }} />
+                <Trophy className="h-12 w-12 mx-auto mb-4" style={{ color: '#ff002b' }} />
                 <h3 className="text-lg font-medium mb-2">No Predictions Yet</h3>
                 <p className="text-sm text-muted-foreground mb-4">
                   Start making predictions to track your forecasting skills!
                 </p>
-                <Button style={{ backgroundColor: '#fca311', color: '#000000' }}>
+                <Button style={{ backgroundColor: '#ff002b', color: '#ffffff' }}>
                   Make Your First Prediction
                 </Button>
               </CardContent>
@@ -269,9 +269,9 @@ export function PredictionHistory() {
 
         <TabsContent value="pending" className="space-y-4">
           {pendingPredictions?.length === 0 ? (
-            <Card style={{ background: '#14213d', color: '#ffffff', border: '1px solid #fca311' }}>
+            <Card style={{ background: '#002962', color: '#ffffff', border: '1px solid #ff002b' }}>
               <CardContent className="text-center py-8">
-                <Clock className="h-8 w-8 mx-auto mb-3" style={{ color: '#fca311' }} />
+                <Clock className="h-8 w-8 mx-auto mb-3" style={{ color: '#ff002b' }} />
                 <p>No pending predictions</p>
               </CardContent>
             </Card>
@@ -291,9 +291,9 @@ export function PredictionHistory() {
 
         <TabsContent value="resolved" className="space-y-4">
           {resolvedPredictions?.length === 0 ? (
-            <Card style={{ background: '#14213d', color: '#ffffff', border: '1px solid #fca311' }}>
+            <Card style={{ background: '#002962', color: '#ffffff', border: '1px solid #ff002b' }}>
               <CardContent className="text-center py-8">
-                <Eye className="h-8 w-8 mx-auto mb-3" style={{ color: '#fca311' }} />
+                <Eye className="h-8 w-8 mx-auto mb-3" style={{ color: '#ff002b' }} />
                 <p>No resolved predictions yet</p>
               </CardContent>
             </Card>

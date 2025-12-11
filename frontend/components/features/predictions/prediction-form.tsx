@@ -159,16 +159,16 @@ export function PredictionForm({ onSuccess }: { onSuccess?: () => void }) {
 
   return (
     <Card className="w-full max-w-2xl mx-auto" style={{ 
-      background: '#14213d', 
-      border: '1px solid #fca311',
-      boxShadow: '0 0 20px rgba(252, 163, 17, 0.15)'
+      background: '#002962', 
+      border: '1px solid #ff002b',
+      boxShadow: '0 0 20px rgba(255, 0, 43, 0.15)'
     }}>
       <CardHeader>
         <CardTitle className="flex items-center space-x-2" style={{ color: '#ffffff' }}>
-          <Trophy className="h-5 w-5" style={{ color: '#fca311' }} />
+          <Trophy className="h-5 w-5" style={{ color: '#ff002b' }} />
           <span>Make a Prediction</span>
         </CardTitle>
-        <CardDescription style={{ color: '#fca311' }}>
+        <CardDescription style={{ color: '#ff002b' }}>
           Predict the outcome of an upcoming fight
         </CardDescription>
       </CardHeader>
@@ -178,10 +178,10 @@ export function PredictionForm({ onSuccess }: { onSuccess?: () => void }) {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
               <Label htmlFor="fighter1" className="text-lg font-bold uppercase tracking-widest mb-2 block" style={{ 
-                background: 'linear-gradient(to right, #ef4444, #f97316)',
+                background: 'linear-gradient(to right, #ff002b, #c00021)',
                 WebkitBackgroundClip: 'text',
                 WebkitTextFillColor: 'transparent',
-                textShadow: '0 0 20px rgba(239, 68, 68, 0.3)'
+                textShadow: '0 0 20px rgba(255, 0, 43, 0.3)'
               }}>
                 Red Corner
               </Label>
@@ -201,10 +201,10 @@ export function PredictionForm({ onSuccess }: { onSuccess?: () => void }) {
 
             <div>
               <Label htmlFor="fighter2" className="text-lg font-bold uppercase tracking-widest mb-2 block" style={{ 
-                background: 'linear-gradient(to right, #3b82f6, #06b6d4)',
+                background: 'linear-gradient(to right, #407ba7, #004e89)',
                 WebkitBackgroundClip: 'text',
                 WebkitTextFillColor: 'transparent',
-                textShadow: '0 0 20px rgba(59, 130, 246, 0.3)'
+                textShadow: '0 0 20px rgba(64, 123, 167, 0.3)'
               }}>
                 Blue Corner
               </Label>
@@ -231,9 +231,9 @@ export function PredictionForm({ onSuccess }: { onSuccess?: () => void }) {
               disabled={isGeneratingAI || !formData.fighter1Name || !formData.fighter2Name}
               className="w-full md:w-auto px-8"
               style={{ 
-                backgroundColor: '#000000', 
-                border: '1px solid #fca311',
-                color: '#fca311'
+                backgroundColor: '#00043a', 
+                border: '1px solid #ff002b',
+                color: '#ff002b'
               }}
             >
               {isGeneratingAI ? (
@@ -268,9 +268,9 @@ export function PredictionForm({ onSuccess }: { onSuccess?: () => void }) {
                   onClick={() => selectWinner(formData.fighter1Name)}
                   className="h-16 text-left justify-start"
                   style={{
-                    backgroundColor: formData.predictedWinner === formData.fighter1Name ? '#fca311' : 'transparent',
-                    borderColor: '#fca311',
-                    color: formData.predictedWinner === formData.fighter1Name ? '#000000' : '#fca311'
+                    backgroundColor: formData.predictedWinner === formData.fighter1Name ? '#ff002b' : 'transparent',
+                    borderColor: '#ff002b',
+                    color: formData.predictedWinner === formData.fighter1Name ? '#ffffff' : '#ff002b'
                   }}
                 >
                   <div>
@@ -285,9 +285,9 @@ export function PredictionForm({ onSuccess }: { onSuccess?: () => void }) {
                   onClick={() => selectWinner(formData.fighter2Name)}
                   className="h-16 text-left justify-start"
                   style={{
-                    backgroundColor: formData.predictedWinner === formData.fighter2Name ? '#fca311' : 'transparent',
-                    borderColor: '#fca311',
-                    color: formData.predictedWinner === formData.fighter2Name ? '#000000' : '#fca311'
+                    backgroundColor: formData.predictedWinner === formData.fighter2Name ? '#ff002b' : 'transparent',
+                    borderColor: '#ff002b',
+                    color: formData.predictedWinner === formData.fighter2Name ? '#ffffff' : '#ff002b'
                   }}
                 >
                   <div>
@@ -307,30 +307,6 @@ export function PredictionForm({ onSuccess }: { onSuccess?: () => void }) {
 
           {/* Submit */}
           <div className="flex items-center justify-between pt-4">
-            <div className="flex items-center space-x-2">
-              <Brain className="h-4 w-4" style={{ color: '#fca311' }} />
-              <span className="text-sm" style={{ color: '#fca311' }}>
-                Track your prediction accuracy
-              </span>
-            </div>
-            
-            <Button
-              type="submit"
-              disabled={isSubmitting || !formData.fighter1Name || !formData.fighter2Name || !formData.predictedWinner}
-              style={{ backgroundColor: '#fca311', color: '#000000' }}
-            >
-              {isSubmitting ? (
-                <div className="flex items-center space-x-2">
-                  <div className="w-4 h-4 border-2 border-current border-t-transparent rounded-full animate-spin" />
-                  <span>Saving...</span>
-                </div>
-              ) : (
-                <div className="flex items-center space-x-2">
-                  <Target className="h-4 w-4" />
-                  <span>Save Prediction</span>
-                </div>
-              )}
-            </Button>
           </div>
         </form>
       </CardContent>

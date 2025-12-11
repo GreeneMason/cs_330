@@ -92,11 +92,11 @@ export function ProfileDashboard() {
 
         <TabsContent value="profile" className="space-y-6">
           {/* Profile Overview */}
-          <Card style={{ background: '#14213d', color: '#ffffff', border: '1px solid #fca311' }}>
+          <Card style={{ background: '#002962', color: '#ffffff', border: '1px solid #ff002b' }}>
             <CardHeader>
               <div className="flex items-center justify-between">
                 <CardTitle className="flex items-center space-x-2">
-                  <User className="h-5 w-5" style={{ color: '#fca311' }} />
+                  <User className="h-5 w-5" style={{ color: '#ff002b' }} />
                   <span>Profile Information</span>
                 </CardTitle>
                 {!isEditing && (
@@ -104,7 +104,7 @@ export function ProfileDashboard() {
                     variant="outline" 
                     size="sm" 
                     onClick={handleEdit}
-                    style={{ borderColor: '#fca311', color: '#fca311' }}
+                    style={{ borderColor: '#ff002b', color: '#ff002b' }}
                   >
                     Edit Profile
                   </Button>
@@ -125,25 +125,25 @@ export function ProfileDashboard() {
                       <h3 className="text-xl font-semibold" style={{ color: '#ffffff' }}>
                         {convexUser.username}
                       </h3>
-                      <p className="text-sm" style={{ color: '#fca311' }}>
+                      <p className="text-sm" style={{ color: '#ff002b' }}>
                         {user?.primaryEmailAddress?.emailAddress}
                       </p>
                     </div>
                   </div>
 
                   <div className="grid grid-cols-2 gap-4">
-                    <div className="p-3 border rounded-lg" style={{ borderColor: '#fca311', backgroundColor: '#000000' }}>
+                    <div className="p-3 border rounded-lg" style={{ borderColor: '#ff002b', backgroundColor: '#00043a' }}>
                       <div className="flex items-center space-x-2 mb-2">
-                        <Calendar className="h-4 w-4" style={{ color: '#fca311' }} />
+                        <Calendar className="h-4 w-4" style={{ color: '#ff002b' }} />
                         <span className="text-sm font-medium">Member Since</span>
                       </div>
                       <p className="text-sm" style={{ color: '#ffffff' }}>
                         {new Date(convexUser.createdAt).toLocaleDateString()}
                       </p>
                     </div>
-                    <div className="p-3 border rounded-lg" style={{ borderColor: '#fca311', backgroundColor: '#000000' }}>
+                    <div className="p-3 border rounded-lg" style={{ borderColor: '#ff002b', backgroundColor: '#00043a' }}>
                       <div className="flex items-center space-x-2 mb-2">
-                        <Mail className="h-4 w-4" style={{ color: '#fca311' }} />
+                        <Mail className="h-4 w-4" style={{ color: '#ff002b' }} />
                         <span className="text-sm font-medium">Email Verified</span>
                       </div>
                       <Badge style={{ backgroundColor: '#10b981', color: '#ffffff' }}>
@@ -162,7 +162,7 @@ export function ProfileDashboard() {
                         id="edit-username"
                         value={editData.username}
                         onChange={(e) => setEditData(prev => ({ ...prev, username: e.target.value }))}
-                        style={{ backgroundColor: '#000000', borderColor: '#fca311', color: '#ffffff' }}
+                        style={{ backgroundColor: '#00043a', borderColor: '#ff002b', color: '#ffffff' }}
                       />
                     </div>
 
@@ -176,7 +176,7 @@ export function ProfileDashboard() {
                             onClick={() => setEditData(prev => ({ ...prev, iconColor: color.value }))}
                             className={`relative p-3 rounded-lg border-2 transition-all hover:scale-105 ${
                               editData.iconColor === color.value 
-                                ? "border-orange-400 shadow-lg" 
+                                ? "border-[#ff002b] shadow-lg" 
                                 : "border-gray-600 hover:border-gray-400"
                             }`}
                             style={{ backgroundColor: color.light }}
@@ -195,14 +195,14 @@ export function ProfileDashboard() {
                     <div className="flex space-x-2 pt-4">
                       <Button 
                         onClick={handleSave}
-                        style={{ backgroundColor: '#fca311', color: '#000000' }}
+                        style={{ backgroundColor: '#ff002b', color: '#ffffff' }}
                       >
                         Save Changes
                       </Button>
                       <Button 
                         variant="outline" 
                         onClick={handleCancel}
-                        style={{ borderColor: '#fca311', color: '#fca311' }}
+                        style={{ borderColor: '#ff002b', color: '#ff002b' }}
                       >
                         Cancel
                       </Button>
@@ -217,10 +217,10 @@ export function ProfileDashboard() {
         <TabsContent value="stats" className="space-y-6">
           {/* Prediction Statistics */}
           <div className="grid gap-4 md:grid-cols-3">
-            <Card style={{ background: '#14213d', color: '#ffffff', border: '1px solid #fca311' }}>
+            <Card style={{ background: '#002962', color: '#ffffff', border: '1px solid #ff002b' }}>
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                 <CardTitle className="text-sm font-medium">Total Predictions</CardTitle>
-                <BarChart3 className="h-4 w-4" style={{ color: '#fca311' }} />
+                <BarChart3 className="h-4 w-4" style={{ color: '#ff002b' }} />
               </CardHeader>
               <CardContent>
                 <div className="text-2xl font-bold">{userStats.stats.totalPredictions}</div>
@@ -228,10 +228,10 @@ export function ProfileDashboard() {
               </CardContent>
             </Card>
 
-            <Card style={{ background: '#14213d', color: '#ffffff', border: '1px solid #fca311' }}>
+            <Card style={{ background: '#002962', color: '#ffffff', border: '1px solid #ff002b' }}>
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                 <CardTitle className="text-sm font-medium">Accuracy Rate</CardTitle>
-                <Trophy className="h-4 w-4" style={{ color: '#fca311' }} />
+                <Trophy className="h-4 w-4" style={{ color: '#ff002b' }} />
               </CardHeader>
               <CardContent>
                 <div className="text-2xl font-bold">{userStats.stats.accuracy}%</div>
@@ -241,10 +241,10 @@ export function ProfileDashboard() {
               </CardContent>
             </Card>
 
-            <Card style={{ background: '#14213d', color: '#ffffff', border: '1px solid #fca311' }}>
+            <Card style={{ background: '#002962', color: '#ffffff', border: '1px solid #ff002b' }}>
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                 <CardTitle className="text-sm font-medium">Rank</CardTitle>
-                <User className="h-4 w-4" style={{ color: '#fca311' }} />
+                <User className="h-4 w-4" style={{ color: '#ff002b' }} />
               </CardHeader>
               <CardContent>
                 <div className="text-2xl font-bold">
@@ -256,16 +256,16 @@ export function ProfileDashboard() {
           </div>
 
           {/* Coming Soon: Detailed Stats */}
-          <Card style={{ background: '#14213d', color: '#ffffff', border: '1px solid #fca311' }}>
+          <Card style={{ background: '#002962', color: '#ffffff', border: '1px solid #ff002b' }}>
             <CardHeader>
               <CardTitle>Prediction History</CardTitle>
-              <CardDescription style={{ color: '#fca311' }}>
+              <CardDescription style={{ color: '#ff002b' }}>
                 Your detailed prediction analytics and history
               </CardDescription>
             </CardHeader>
             <CardContent>
               <div className="text-center py-8">
-                <Trophy className="h-12 w-12 mx-auto mb-4" style={{ color: '#fca311' }} />
+                <Trophy className="h-12 w-12 mx-auto mb-4" style={{ color: '#ff002b' }} />
                 <h3 className="text-lg font-medium mb-2">Coming Soon</h3>
                 <p className="text-sm text-muted-foreground">
                   Detailed prediction history and analytics will be available once you start making predictions!
