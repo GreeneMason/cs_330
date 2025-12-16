@@ -160,17 +160,13 @@ export function PredictionForm({ onSuccess }: { onSuccess?: () => void }) {
   return (
     <Card className="w-full max-w-2xl mx-auto" style={{ 
       background: '#002962', 
-      border: '1px solid #ff002b',
+      border: 'none',
       boxShadow: '0 0 20px rgba(255, 0, 43, 0.15)'
     }}>
       <CardHeader>
-        <CardTitle className="flex items-center space-x-2" style={{ color: '#ffffff' }}>
-          <Trophy className="h-5 w-5" style={{ color: '#ff002b' }} />
-          <span>Make a Prediction</span>
+        <CardTitle className="text-center text-2xl font-bold" style={{ color: '#ffffff' }}>
+          Select Your Fighters!
         </CardTitle>
-        <CardDescription style={{ color: '#ff002b' }}>
-          Predict the outcome of an upcoming fight
-        </CardDescription>
       </CardHeader>
       <CardContent>
         <form onSubmit={handleSubmit} className="space-y-6">

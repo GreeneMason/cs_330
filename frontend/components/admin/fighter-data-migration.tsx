@@ -113,13 +113,13 @@ export function FighterDataMigration() {
   };
 
   return (
-    <Card className="w-full max-w-4xl mx-auto" style={{ background: '#14213d', border: '1px solid #fca311' }}>
+    <Card className="w-full max-w-4xl mx-auto" style={{ background: '#002962', border: '1px solid #ff002b' }}>
       <CardHeader>
         <CardTitle className="flex items-center space-x-2" style={{ color: '#ffffff' }}>
-          <Database className="h-5 w-5" style={{ color: '#fca311' }} />
+          <Database className="h-5 w-5" style={{ color: '#ff002b' }} />
           <span>Fighter Data Migration</span>
         </CardTitle>
-        <CardDescription style={{ color: '#fca311' }}>
+        <CardDescription style={{ color: '#ff002b' }}>
           Upload fighter data from the CSV extraction to Convex database
         </CardDescription>
       </CardHeader>
@@ -136,7 +136,7 @@ export function FighterDataMigration() {
             </div>
 
             <div className="flex flex-col space-y-3">
-              <div className="text-sm" style={{ color: '#fca311' }}>
+              <div className="text-sm" style={{ color: '#ff002b' }}>
                 Expected file: <code>fighter_migration_data.json</code> from the Python migration script
               </div>
               
@@ -152,9 +152,9 @@ export function FighterDataMigration() {
                 htmlFor="migration-file"
                 className="inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium cursor-pointer"
                 style={{ 
-                  backgroundColor: '#fca311', 
-                  color: '#000000',
-                  border: '1px solid #fca311'
+                  backgroundColor: '#ff002b', 
+                  color: '#ffffff',
+                  border: '1px solid #ff002b'
                 }}
               >
                 <Upload className="h-4 w-4 mr-2" />
@@ -166,7 +166,7 @@ export function FighterDataMigration() {
 
         {uploadStatus === 'uploading' && (
           <div className="space-y-4">
-            <div className="flex items-center space-x-2" style={{ color: '#fca311' }}>
+            <div className="flex items-center space-x-2" style={{ color: '#ff002b' }}>
               <div className="w-4 h-4 border-2 border-current border-t-transparent rounded-full animate-spin" />
               <span>Uploading fighters to Convex...</span>
             </div>
@@ -180,7 +180,7 @@ export function FighterDataMigration() {
                   <div 
                     className="h-2 rounded-full transition-all duration-300"
                     style={{ 
-                      backgroundColor: '#fca311',
+                      backgroundColor: '#ff002b',
                       width: `${(currentBatch / totalBatches) * 100}%`
                     }}
                   />
@@ -200,7 +200,7 @@ export function FighterDataMigration() {
             <div className="grid grid-cols-2 gap-4">
               <div className="bg-gray-800 p-3 rounded-md">
                 <div className="text-sm text-gray-400">Total Fighters</div>
-                <div className="text-2xl font-bold" style={{ color: '#fca311' }}>
+                <div className="text-2xl font-bold" style={{ color: '#ff002b' }}>
                   {uploadResults.totalFighters}
                 </div>
               </div>

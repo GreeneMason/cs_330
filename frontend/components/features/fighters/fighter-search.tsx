@@ -85,7 +85,7 @@ export function FighterSearch({ value, onChange, placeholder = "Enter fighter na
       <div className="relative">
         <Search 
           className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4" 
-          style={{ color: '#fca311' }}
+          style={{ color: '#ff002b' }}
         />
         <Input
           value={value}
@@ -96,7 +96,7 @@ export function FighterSearch({ value, onChange, placeholder = "Enter fighter na
           className="pl-10"
           style={{ 
             backgroundColor: '#000000', 
-            borderColor: error ? '#ef4444' : '#fca311', 
+            borderColor: error ? '#ef4444' : '#ff002b', 
             color: '#ffffff',
             boxShadow: '0 0 10px rgba(252, 163, 17, 0.1)'
           }}
@@ -106,7 +106,7 @@ export function FighterSearch({ value, onChange, placeholder = "Enter fighter na
       {showSuggestions && (
         <Card 
           className="absolute z-50 w-full mt-1 max-h-64 overflow-y-auto"
-          style={{ backgroundColor: '#14213d', border: '1px solid #fca311' }}
+          style={{ backgroundColor: '#002962', border: '1px solid #ff002b' }}
         >
           <CardContent className="p-0">
             {suggestions.map((fighter, index) => {
@@ -121,7 +121,7 @@ export function FighterSearch({ value, onChange, placeholder = "Enter fighter na
                 >
                   <div className="flex items-center justify-between">
                     <div className="flex items-center space-x-3">
-                      <User className="h-4 w-4" style={{ color: '#fca311' }} />
+                      <User className="h-4 w-4" style={{ color: '#ff002b' }} />
                       <div>
                         <div className="font-medium">{fighter.name}</div>
                         <div className="text-xs text-gray-400 flex items-center space-x-3">

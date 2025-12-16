@@ -21,18 +21,26 @@ export function Header() {
     >
       <div className="container mx-auto flex h-16 items-center justify-between px-4 mt-2">
         {/* Logo and Title */}
-        <div className="flex items-center space-x-4 bg-[#00043a]/40 px-4 py-2 rounded-full border border-[#ff002b]/30 backdrop-blur-md">
+        <div className="flex items-center space-x-4 px-4 py-2 rounded-full backdrop-blur-md" style={{
+          background: 'linear-gradient(135deg, #0B5345 0%, #064635 100%)',
+          border: '1px solid #FFD700',
+          boxShadow: '0 0 20px rgba(184, 134, 11, 0.3)'
+        }}>
           <div className="flex items-center space-x-2">
-            <h1 className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-white to-[#ff002b]">
+            <h1 className="text-xl font-bold" style={{
+              color: '#FFD700',
+              textShadow: '0 0 10px rgba(255, 215, 0, 0.5)'
+            }}>
               Predictr
             </h1>
             <Badge  
               variant="secondary" 
               className="text-xs"
               style={{ 
-                backgroundColor: '#ff002b', 
-                color: '#ffffff',
-                border: 'none' 
+                background: 'linear-gradient(135deg, #B8860B 0%, #FFD700 100%)',
+                color: '#000000',
+                border: 'none',
+                fontWeight: 'bold'
               }}
             >
               AI-Powered
@@ -43,60 +51,60 @@ export function Header() {
         {/* Navigation */}
         <nav className="flex items-center space-x-2">
           <Button variant="ghost" size="sm" asChild className="rounded-full transition-all hover:scale-105" style={{
-            background: 'linear-gradient(180deg, rgba(0, 78, 137, 0.2) 0%, rgba(0, 4, 58, 0.2) 100%)',
+            background: 'linear-gradient(135deg, #8B0000 0%, #000000 100%)',
             backdropFilter: 'blur(8px)',
-            border: 'none',
-            boxShadow: '0 2px 10px rgba(0,4,58,0.1)'
+            border: '1px solid #B8860B',
+            boxShadow: '0 2px 10px rgba(184, 134, 11, 0.2)'
           }}>
             <Link 
               href="/" 
               className="flex items-center space-x-2"
-              style={{ color: '#ffffff' }}
+              style={{ color: '#FFD700' }}
             >
               <span>Home</span>
             </Link>
           </Button>
           
           <Button variant="ghost" size="sm" asChild className="rounded-full transition-all hover:scale-105" style={{
-            background: 'linear-gradient(180deg, rgba(0, 78, 137, 0.2) 0%, rgba(0, 4, 58, 0.2) 100%)',
+            background: 'linear-gradient(135deg, #064635 0%, #032D23 100%)',
             backdropFilter: 'blur(8px)',
-            border: 'none',
-            boxShadow: '0 2px 10px rgba(0,4,58,0.1)'
+            border: '1px solid #B8860B',
+            boxShadow: '0 2px 10px rgba(184, 134, 11, 0.2)'
           }}>
             <Link 
               href="/predict" 
               className="flex items-center space-x-2"
-              style={{ color: '#ffffff' }}
+              style={{ color: '#FFD700' }}
             >
               <span>Predict</span>
             </Link>
           </Button>
 
           <Button variant="ghost" size="sm" asChild className="rounded-full transition-all hover:scale-105" style={{
-            background: 'linear-gradient(180deg, rgba(0, 78, 137, 0.2) 0%, rgba(0, 4, 58, 0.2) 100%)',
+            background: 'linear-gradient(135deg, #064635 0%, #032D23 100%)',
             backdropFilter: 'blur(8px)',
-            border: 'none',
-            boxShadow: '0 2px 10px rgba(0,4,58,0.1)'
+            border: '1px solid #B8860B',
+            boxShadow: '0 2px 10px rgba(184, 134, 11, 0.2)'
           }}>
             <Link 
               href="/predictions" 
               className="flex items-center space-x-2"
-              style={{ color: '#ffffff' }}
+              style={{ color: '#FFD700' }}
             >
               <span>My Predictions</span>
             </Link>
           </Button>
           
           <Button variant="ghost" size="sm" asChild className="rounded-full transition-all hover:scale-105" style={{
-            background: 'linear-gradient(180deg, rgba(0, 78, 137, 0.2) 0%, rgba(0, 4, 58, 0.2) 100%)',
+            background: 'linear-gradient(135deg, #064635 0%, #032D23 100%)',
             backdropFilter: 'blur(8px)',
-            border: 'none',
-            boxShadow: '0 2px 10px rgba(0,4,58,0.1)'
+            border: '1px solid #B8860B',
+            boxShadow: '0 2px 10px rgba(184, 134, 11, 0.2)'
           }}>
             <Link 
               href="/profile" 
               className="flex items-center space-x-2"
-              style={{ color: '#ffffff' }}
+              style={{ color: '#FFD700' }}
             >
               <span>Profile</span>
             </Link>
@@ -104,15 +112,15 @@ export function Header() {
 
           {isDevUser && (
             <Button variant="ghost" size="sm" asChild className="rounded-full transition-all hover:scale-105" style={{
-              background: 'linear-gradient(180deg, rgba(192, 0, 33, 0.2) 0%, rgba(0, 4, 58, 0.2) 100%)',
+              background: 'linear-gradient(135deg, #064635 0%, #032D23 100%)',
               backdropFilter: 'blur(8px)',
-              border: 'none',
-              boxShadow: '0 2px 10px rgba(192, 0, 33, 0.1)'
+              border: '1px solid #B8860B',
+              boxShadow: '0 2px 10px rgba(184, 134, 11, 0.2)'
             }}>
               <Link 
                 href="/dev-mode" 
                 className="flex items-center space-x-2"
-                style={{ color: '#ffffff' }}
+                style={{ color: '#FFD700' }}
               >
                 <span>Dev Mode</span>
               </Link>
@@ -121,7 +129,11 @@ export function Header() {
         </nav>
 
         {/* Status Badge and User Authentication */}
-        <div className="flex items-center space-x-4 bg-[#00043a]/40 px-4 py-2 rounded-full border border-[#ff002b]/30 backdrop-blur-md">
+        <div className="flex items-center space-x-4 px-4 py-2 rounded-full backdrop-blur-md" style={{
+          background: 'linear-gradient(135deg, #0B5345 0%, #064635 100%)',
+          border: '1px solid #FFD700',
+          boxShadow: '0 0 20px rgba(184, 134, 11, 0.3)'
+        }}>
           {/* Authentication */}
           <SignedOut>
             <div className="flex items-center space-x-2">
@@ -141,8 +153,8 @@ export function Header() {
                   variant="outline" 
                   size="sm"
                   style={{ 
-                    borderColor: '#ff002b', 
-                    color: '#ff002b',
+                    borderColor: '#FFD700', 
+                    color: '#FFD700',
                     backgroundColor: 'transparent'
                   }}
                   className="hover:bg-opacity-10"
@@ -158,12 +170,15 @@ export function Header() {
 
           {/* Status Badge */}
           <Badge 
-            className="text-white"
-            style={{ backgroundColor: '#ff002b', border: 'none' }}
+            className="text-black font-bold"
+            style={{ 
+              background: 'linear-gradient(135deg, #B8860B 0%, #FFD700 100%)',
+              border: 'none'
+            }}
           >
             <div 
               className="h-2 w-2 rounded-full mr-1 animate-pulse"
-              style={{ backgroundColor: '#c00021' }}
+              style={{ backgroundColor: '#228B22' }}
             ></div>
             Models Ready
           </Badge>

@@ -19,12 +19,9 @@ export default function PredictPage() {
         <div className="flex flex-col gap-4">
         <div className="flex justify-center text-center">
           <div>
-            <h1 className="text-3xl font-bold tracking-tight" style={{ color: '#ffffff' }}>
+            <h1 className="font-bold tracking-tight" style={{ color: '#ffffff', fontSize: '2.625rem' }}>
               Fight Prediction
             </h1>
-            <p style={{ color: '#ff002b' }}>
-              Select existing fighters to predict fight outcomes using our 91.33% accurate AI ensemble
-            </p>
           </div>
         </div>
       </div>

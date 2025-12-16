@@ -4,6 +4,7 @@ import { ClerkProvider } from '@clerk/nextjs';
 import { ConvexClientProvider } from '@/components/providers/convex-provider';
 import { UserProvider } from '@/components/providers/user-provider';
 import { Header } from "@/components/layout/header";
+import { Footer } from "@/components/layout/footer";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -30,15 +31,16 @@ export default function RootLayout({
     <html lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-        style={{ backgroundColor: '#000000', minHeight: '100vh' }}
+        style={{ backgroundColor: '#000000', minHeight: '100vh', display: 'flex', flexDirection: 'column' }}
       >
         <ClerkProvider>
           <ConvexClientProvider>
             <UserProvider>
               <Header />
-              <main className="container mx-auto px-4 py-8 text-center" style={{ backgroundColor: 'transparent' }}>
+              <main className="container mx-auto px-4 py-8 text-center flex-1" style={{ backgroundColor: 'transparent' }}>
                 {children}
               </main>
+              <Footer />
             </UserProvider>
           </ConvexClientProvider>
         </ClerkProvider>

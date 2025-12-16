@@ -12,30 +12,32 @@ export default function Dashboard() {
       <div 
         className="fixed inset-0 -z-10"
         style={{ 
-          backgroundColor: '#00043a',
+          background: 'radial-gradient(ellipse at center, #1a0000 0%, #000000 100%)',
         }}
       />
       <div className="flex items-center justify-center" style={{ minHeight: '100vh' }}>
         <Link href="/predict">
           <button
-            className="group relative px-10 py-5 text-xl font-bold text-white rounded-2xl transition-all duration-300 hover:scale-110 active:scale-95 hover:shadow-[0_0_60px_rgba(255,0,43,0.8),0_0_100px_rgba(255,0,43,0.5)]"
+            className="group relative px-10 py-5 text-xl font-bold rounded-2xl transition-all duration-300 hover:scale-110 active:scale-95"
             style={{
-              background: 'linear-gradient(135deg, #ff002b 0%, #c00021 100%)',
-              boxShadow: '0 0 40px rgba(255, 0, 43, 0.6), 0 0 80px rgba(255, 0, 43, 0.3), inset 0 0 20px rgba(255, 255, 255, 0.2)',
-              border: '2px solid rgba(255, 255, 255, 0.3)',
+              background: 'linear-gradient(135deg, #8B0000 0%, #B8860B 50%, #8B0000 100%)',
+              color: '#FFD700',
+              boxShadow: '0 0 30px rgba(184, 134, 11, 0.4), inset 0 2px 10px rgba(255, 215, 0, 0.2)',
+              border: '2px solid #FFD700',
+              textShadow: '0 0 10px rgba(255, 215, 0, 0.5)',
             }}
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
           >
             <span className="flex items-center gap-3">
-              <Zap className="w-6 h-6" />
+              <Zap className="w-6 h-6" style={{ filter: 'drop-shadow(0 0 5px #FFD700)' }} />
               Select Matchup
             </span>
             <div 
-              className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+              className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 group-hover:animate-pulse"
               style={{
-                background: 'radial-gradient(circle at center, rgba(255, 255, 255, 0.2) 0%, transparent 70%)',
-                animation: 'pulse 2s ease-in-out infinite',
+                background: 'radial-gradient(circle at center, rgba(255, 215, 0, 0.3) 0%, transparent 70%)',
+                boxShadow: '0 0 80px rgba(184, 134, 11, 1), 0 0 120px rgba(255, 215, 0, 0.6)',
               }}
             />
           </button>
